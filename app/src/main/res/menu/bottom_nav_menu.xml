@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="@string/nav_dashboard"/>
+    <item
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/ic_admin"
+        android:title="@string/nav_admin"/>
+    <item
+        android:id="@+id/nav_schedule"
+        android:icon="@drawable/ic_schedule"
+        android:title="@string/nav_schedule"/>
+    <item
+        android:id="@+id/nav_results"
+        android:icon="@drawable/ic_results"
+        android:title="@string/nav_results"/>
+    <item
+        android:id="@+id/nav_courses"
+        android:icon="@drawable/ic_courses"
+        android:title="@string/nav_courses"/>
+</menu>

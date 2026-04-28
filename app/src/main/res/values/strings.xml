@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SIAKAD Universitas Widyatama</string>
+    <string name="university_name">Universitas Widyatama</string>
+    <string name="sign_in_title">Sign in to SIAKAD</string>
+    <string name="student_id_hint">Student ID / NPM</string>
+    <string name="password_hint">Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login_button">Log In →</string>
+    <string name="new_student_info">New student? Contact Academic Affairs to activate your account.</string>
+    <string name="copyright">© 2024 Universitas Widyatama</string>
+    
+    <string name="welcome_text">Selamat Datang, AHMAD HAFIZH KARUNIA PUTRA</string>
+    <string name="ipk_label">IPK Terakhir</string>
+    <string name="ipk_value">3.82</string>
+    <string name="scan_presensi">Scan Presensi</string>
+    
+    <string name="schedule_today">Jadwal hari ini, Minggu 12</string>
+    <string name="day_of_week">Selasa</string>
+    
+    <string name="course_1_time">08:00 - 10:30</string>
+    <string name="course_1_name">Pengantar Kecerdasan Buatan</string>
+    <string name="course_1_room">C218</string>
+    <string name="course_1_lecturer">Dr. Adi Wijaya, S.Kom., M.T.</string>
+    
+    <string name="course_2_time">11:00 - 12:30</string>
+    <string name="course_2_name">Statistik dan Probabilitas</string>
+    <string name="course_2_room">A302</string>
+    <string name="course_2_lecturer">Dr. Siti Nurhaliza, M.Sc.</string>
+    
+    <string name="course_3_time">13:00 - 15:30</string>
+    <string name="course_3_name">Basis Data Lanjutan</string>
+    <string name="course_3_room">Lab D105</string>
+    <string name="course_3_lecturer">Prof. Budi Santoso, M.Kom.</string>
+    
+    <string name="announcements_title">Pengumuman</string>
+    <string name="view_all">LIHAT SEMUA</string>
+    <string name="announcement_1_title">Pengumpulan UTS Dimulai Minggu Depan</string>
+    <string name="announcement_1_time">2 jam yang lalu</string>
+    <string name="announcement_2_title">Jadwal UAS Semester Genap 2024</string>
+    <string name="announcement_2_time">5 jam yang lalu</string>
+    <string name="announcement_3_title">Pembayaran UKT Tahap 2</string>
+    <string name="announcement_3_time">1 hari yang lalu</string>
+    
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_admin">Admin</string>
+    <string name="nav_schedule">Jadwal</string>
+    <string name="nav_results">Nilai</string>
+    <string name="nav_courses">Mata Kuliah</string>
+    
+    <string name="login_error">Please enter Student ID and Password</string>
+    <string name="login_failed">Invalid credentials. Please try again.</string>
+</resources>
