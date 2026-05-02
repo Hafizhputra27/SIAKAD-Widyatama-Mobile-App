@@ -2,10 +2,10 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityLoginBinding
+import android.view.View
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -28,11 +28,8 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (validateCredentials(studentId, password)) {
-                navigateToDashboard()
-            } else {
-                Toast.makeText(this, R.string.login_failed, Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
+            navigateToDashboard(studentId)
         }
 
         binding.tvForgotPassword.setOnClickListener {
@@ -40,13 +37,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateCredentials(studentId: String, password: String): Boolean {
-        return studentId.isNotEmpty() && password.length >= 4
-    }
-
-    private fun navigateToDashboard() {
+    private fun navigateToDashboard(username: String) {
         val intent = Intent(this, DashboardActivity::class.java)
+        intent.putExtra("USER_NAME", username)
         startActivity(intent)
         finish()
+    }
+
+    fun navigateToRegister(view: View) {
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

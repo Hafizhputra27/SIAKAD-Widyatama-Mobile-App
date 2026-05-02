@@ -19,21 +19,6 @@
     <string name="schedule_today">Jadwal hari ini, Minggu 12</string>
     <string name="day_of_week">Selasa</string>
     
-    <string name="course_1_time">08:00 - 10:30</string>
-    <string name="course_1_name">Pengantar Kecerdasan Buatan</string>
-    <string name="course_1_room">C218</string>
-    <string name="course_1_lecturer">Dr. Adi Wijaya, S.Kom., M.T.</string>
-    
-    <string name="course_2_time">11:00 - 12:30</string>
-    <string name="course_2_name">Statistik dan Probabilitas</string>
-    <string name="course_2_room">A302</string>
-    <string name="course_2_lecturer">Dr. Siti Nurhaliza, M.Sc.</string>
-    
-    <string name="course_3_time">13:00 - 15:30</string>
-    <string name="course_3_name">Basis Data Lanjutan</string>
-    <string name="course_3_room">Lab D105</string>
-    <string name="course_3_lecturer">Prof. Budi Santoso, M.Kom.</string>
-    
     <string name="announcements_title">Pengumuman</string>
     <string name="view_all">LIHAT SEMUA</string>
     <string name="announcement_1_title">Pengumpulan UTS Dimulai Minggu Depan</string>
@@ -51,4 +36,13 @@
     
     <string name="login_error">Please enter Student ID and Password</string>
     <string name="login_failed">Invalid credentials. Please try again.</string>
+    <string name="login_success">Login Berhasil</string>
+    <string name="register_title">Registrasi</string>
+    <string name="username_hint">Username</string>
+    <string name="confirm_password_hint">Konfirmasi Password</string>
+    <string name="register_button">Simpan / Register</string>
+    <string name="registration_success">Registrasi Berhasil</string>
+    <string name="empty_field_error">Semua field harus diisi</string>
+    <string name="password_mismatch_error">Password dan Konfirmasi Password tidak sama</string>
+    <string name="go_to_login">Sudah punya akun? Login</string>
 </resources>

@@ -2,8 +2,8 @@ package com.example.myapplication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.ActivityDashboardBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -13,17 +13,30 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupViews()
+        setupBottomNavigation()
+
+        if (savedInstanceState == null) {
+            loadFragment(DashboardFragment().apply {
+                arguments = Bundle().apply {
+                    putString("USER_NAME", intent.getStringExtra("USER_NAME"))
+                }
+            })
+        }
     }
 
-    private fun setupViews() {
+    private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_dashboard -> {
+                    loadFragment(DashboardFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("USER_NAME", intent.getStringExtra("USER_NAME"))
+                        }
+                    })
                     true
                 }
                 R.id.nav_admin -> {
-                    showFeatureComingSoon("Admin")
+                    loadFragment(AdminFragment())
                     true
                 }
                 R.id.nav_schedule -> {
@@ -43,7 +56,13 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
+
     private fun showFeatureComingSoon(feature: String) {
-        // Placeholder for future navigation - shows dashboard for now
+        // Placeholder for future navigation
     }
 }
