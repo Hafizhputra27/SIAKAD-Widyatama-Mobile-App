@@ -32,20 +32,64 @@
     <string name="nav_admin">Admin</string>
     <string name="nav_schedule">Jadwal</string>
     <string name="nav_results">Nilai</string>
-    <string name="nav_courses">Mata Kuliah</string>
+    <string name="nav_profile">Profile</string>
     
+    <string name="student_portal">Student Portal</string>
+    <string name="student_nim">NIM: 20248831</string>
+    <string name="student_major">Sistem Informasi</string>
+    <string name="status_aktif">STATUS: AKTIF</string>
+    <string name="angkatan_2021">ANGKATAN: 2024</string>
+
+    <string name="ipk_kumulatif">IPK KUMULATIF</string>
+    <string name="ipk_max">/ 4.00</string>
+    <string name="total_sks">TOTAL SKS</string>
+    <string name="sks_value">114</string>
+    <string name="sks_max">/ 144</string>
+
+    <string name="semester_berjalan">SEMESTER BERJALAN</string>
+    <string name="semester_value">4</string>
+    <string name="target_kelulusan">Target Kelulusan: Semester 8</string>
+
+    <string name="menu_biodata">Biodata</string>
+    <string name="menu_biodata_desc">Data diri, alamat, dan kontak personal</string>
+    <string name="menu_riwayat">Riwayat Akademik</string>
+    <string name="menu_riwayat_desc">Daftar nilai semester dan transkrip</string>
+    <string name="menu_dokumen">Dokumen</string>
+    <string name="menu_dokumen_desc">KTM Digital, KHS, dan surat keterangan</string>
+
+    <string name="account_settings">PENGATURAN AKUN &amp; PREFERENSI</string>
+
+    <string name="title_pengaturan">Pengaturan</string>
+    <string name="category_akun">AKUN</string>
+    <string name="menu_ubah_password">Ubah Password</string>
+    <string name="desc_ubah_password">Update kredensial keamanan Anda</string>
+    <string name="menu_keamanan">Keamanan</string>
+    <string name="desc_keamanan">Autentikasi dua faktor dan sesi aktif</string>
+
+    <string name="category_notifikasi">NOTIFIKASI</string>
+    <string name="menu_push_notif">Push Notification</string>
+    <string name="desc_push_notif">Terima info jadwal dan tugas langsung</string>
+    <string name="menu_email_notif">Email Notifikasi</string>
+    <string name="desc_email_notif">Laporan hasil studi mingguan</string>
+
+    <string name="category_tampilan">TAMPILAN</string>
+    <string name="menu_mode_gelap">Mode Gelap</string>
+    <string name="desc_mode_gelap">Aktifkan untuk kenyamanan mata</string>
+    <string name="menu_bahasa">Bahasa</string>
+    <string name="val_bahasa">Bahasa Indonesia</string>
+
+    <string name="category_lainnya">LAINNYA</string>
+    <string name="menu_pusat_bantuan">Pusat Bantuan</string>
+    <string name="menu_tentang">Tentang Aplikasi</string>
+    <string name="btn_keluar">Keluar</string>
     <string name="login_error">Please enter Student ID and Password</string>
-    <string name="login_failed">Invalid credentials. Please try again.</string>
-    <string name="login_success">Login Berhasil</string>
-    <string name="register_title">Registrasi</string>
-    <string name="name_hint">Nama Lengkap</string>
-    <string name="npm_hint">NPM (Nomor Pokok Mahasiswa)</string>
-    <string name="major_hint">Jurusan</string>
-    <string name="campus_email_hint">Email Kampus</string>
-    <string name="confirm_password_hint">Konfirmasi Password</string>
-    <string name="register_button">Simpan / Register</string>
-    <string name="registration_success">Registrasi Berhasil</string>
-    <string name="empty_field_error">Semua field harus diisi</string>
-    <string name="password_mismatch_error">Password dan Konfirmasi Password tidak sama</string>
-    <string name="go_to_login">Sudah punya akun? Login</string>
+    <string name="login_success">Login Successful</string>
+    <string name="empty_field_error">Please fill in all fields</string>
+    <string name="password_mismatch_error">Passwords do not match</string>
+    <string name="registration_success">Registration Successful</string>
+    <string name="register_button">Register</string>
+    <string name="register_title">Create Account</string>
+    <string name="username_hint">Username</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="go_to_login">Already have an account? Log In</string>
 </resources>

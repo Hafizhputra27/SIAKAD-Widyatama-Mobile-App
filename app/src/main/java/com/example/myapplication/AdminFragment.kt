@@ -28,39 +28,87 @@ class AdminFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerViews()
         setupClickListeners()
+        // Set default view to Tagihan Aktif
+        binding.chipActiveBills.performClick()
     }
 
-    private fun setupRecyclerViews() {
-        val academicYears = PaymentData.getAcademicYears()
-        binding.rvAcademicYear.apply {
+    private fun setupRecyclerViews(details: List<com.example.myapplication.model.PaymentDetail>) {
+        binding.rvPayments.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = AcademicYearAdapter(academicYears)
-        }
-
-        val paymentDetails = PaymentData.getPaymentDetails()
-        binding.rvPaymentDetails.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = PaymentDetailAdapter(paymentDetails)
+            adapter = PaymentDetailAdapter(details)
         }
     }
 
     private fun setupClickListeners() {
         binding.btnDownload.setOnClickListener {
-            Toast.makeText(requireContext(), "Download functionality coming soon!", Toast.LENGTH_SHORT).show()
+            val currentTab = binding.tvMainTitle.text.toString()
+            Toast.makeText(requireContext(), "Downloading data for $currentTab...", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.chipActiveBills.setOnClickListener {
+            val data = PaymentData.getActiveBills()
+            updateActiveTab(it.id)
+            updateUIForTab(
+                "Tagihan Aktif",
+                "Daftar tagihan yang harus\nsegera dibayarkan",
+                "Total Tagihan Aktif",
+                calculateTotal(data),
+                data
+            )
         }
 
         binding.chipHistoryPayment.setOnClickListener {
-            Toast.makeText(requireContext(), "History Pembayaran selected", Toast.LENGTH_SHORT).show()
+            val data = PaymentData.getPaymentHistory()
+            updateActiveTab(it.id)
+            updateUIForTab(
+                "History Pembayaran",
+                "Riwayat transaksi pembayaran\numum mahasiswa",
+                "Total Pembayaran",
+                calculateTotal(data),
+                data
+            )
         }
+    }
 
-        binding.chipHistoryUsp.setOnClickListener {
-            Toast.makeText(requireContext(), "History USP selected", Toast.LENGTH_SHORT).show()
+    private fun calculateTotal(details: List<com.example.myapplication.model.PaymentDetail>): String {
+        var total = 0L
+        details.forEach {
+            val cleanAmount = it.nominal.replace("Rp ", "").replace(".", "").replace(",", "")
+            total += cleanAmount.toLongOrNull() ?: 0L
         }
+        return "Rp " + java.text.NumberFormat.getIntegerInstance(java.util.Locale("id", "ID")).format(total)
+    }
 
-        binding.chipHistorySpp.setOnClickListener {
-            Toast.makeText(requireContext(), "History SPP selected", Toast.LENGTH_SHORT).show()
+    private fun updateActiveTab(selectedChipId: Int) {
+        val chips = listOf(binding.chipActiveBills, binding.chipHistoryPayment)
+        chips.forEach { chip ->
+            if (chip.id == selectedChipId) {
+                chip.setChipBackgroundColorResource(R.color.navy_blue)
+                chip.setTextColor(resources.getColor(R.color.white, null))
+            } else {
+                chip.setChipBackgroundColorResource(R.color.light_gray)
+                chip.setTextColor(resources.getColor(R.color.navy_blue, null))
+            }
+        }
+    }
+
+    private fun updateUIForTab(title: String, subtitle: String, summaryLabel: String, amount: String, data: List<com.example.myapplication.model.PaymentDetail>) {
+        binding.tvMainTitle.text = title
+        binding.tvMainSubtitle.text = subtitle
+        binding.tvSummaryLabel.text = summaryLabel
+        binding.tvSummaryAmount.text = amount
+        setupRecyclerViews(data)
+        
+        // Dynamic summary card behavior
+        if (title == "Tagihan Aktif") {
+            binding.progressPayment.progress = 0
+            binding.tvProgressValue.text = "0%"
+            binding.tvStatusFooter.text = "Status: BELUM LUNAS"
+        } else {
+            binding.progressPayment.progress = 100
+            binding.tvProgressValue.text = "100%"
+            binding.tvStatusFooter.text = "Status: LUNAS"
         }
     }
 

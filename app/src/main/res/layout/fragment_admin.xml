@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="#F8F9FD"
     android:fillViewport="true">
 
     <LinearLayout
@@ -11,87 +11,68 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="12dp"
-            android:gravity="center_vertical">
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:scaleType="fitStart"
                 android:src="@drawable/logo_widyatama" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_notification"
-                app:tint="@color/navy_blue"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivProfile"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_person"
-                app:civ_border_color="@color/navy_blue"
-                app:civ_border_width="1dp"/>
+                android:layout_weight="1" />
 
         </LinearLayout>
 
+        <!-- Horizontal Tabs -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
             android:background="@color/white"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="12dp">
+            android:paddingBottom="16dp"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipActiveBills"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tagihan Aktif"
+                    android:textColor="@color/white"
+                    app:chipBackgroundColor="@color/navy_blue"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeWidth="0dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipHistoryPayment"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="History Pembayaran"
-                    android:textColor="@color/white"
-                    app:chipBackgroundColor="@color/navy_blue"
-                    app:chipCornerRadius="20dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipHistoryUsp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="History USP"
                     android:textColor="@color/navy_blue"
-                    app:chipBackgroundColor="@color/light_gray"
-                    app:chipCornerRadius="20dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipHistorySpp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="History SPP"
-                    android:textColor="@color/navy_blue"
-                    app:chipBackgroundColor="@color/light_gray"
-                    app:chipCornerRadius="20dp"/>
+                    app:chipBackgroundColor="#F0F2F8"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeWidth="0dp" />
 
             </LinearLayout>
-
         </HorizontalScrollView>
 
         <LinearLayout
@@ -100,180 +81,161 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <LinearLayout
+            <!-- Title Section -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_toStartOf="@id/btnDownload"
+                    android:layout_alignParentStart="true"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvMainTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="History Pembayaran"
+                        android:text="History USP"
                         android:textColor="@color/navy_blue"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvMainSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Riwayat transaksi biaya pendidikan mahasiswa"
+                        android:text="Riwayat transaksi biaya\npendidikan mahasiswa"
                         android:textColor="@color/text_secondary"
-                        android:textSize="13sp"/>
-
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDownload"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:text="Download"
+                    android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="12sp"
-                    app:backgroundTint="@color/orange_accent"
-                    app:cornerRadius="8dp"
+                    app:backgroundTint="#A35216"
+                    app:cornerRadius="12dp"
                     app:icon="@drawable/ic_download"
-                    app:iconTint="@color/white"
-                    app:iconSize="16dp"/>
+                    app:iconPadding="8dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/white" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="12dp"
-                android:text="Tahun Akademik"
-                android:textColor="@color/navy_blue"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAcademicYear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"/>
-
+            <!-- Summary Card -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/navy_blue"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <TextView
+                        android:id="@+id/tvSummaryLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:text="Rincian Pembayaran"
-                        android:textColor="@color/navy_blue"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:text="Total Kewajiban USP"
+                        android:textColor="#C5CAE9"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tvSummaryAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Rp 14.500.000"
+                        android:textColor="@color/white"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingVertical="8dp"
-                        android:background="@color/light_gray">
+                        android:layout_marginTop="16dp">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:id="@+id/tvProgressLabel"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.2"
-                            android:text="CICILAN"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:text="Progres Pembayaran"
+                            android:textColor="@color/white"
+                            android:textSize="11sp" />
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:id="@+id/tvProgressValue"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.2"
-                            android:text="DEADLINE"
-                            android:textColor="@color/text_secondary"
+                            android:layout_alignParentEnd="true"
+                            android:text="100%"
+                            android:textColor="@color/white"
                             android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressPayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:progress="100"
+                        app:indicatorColor="#4FC3F7"
+                        app:trackColor="#283593"
+                        app:trackCornerRadius="4dp"
+                        app:trackThickness="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_person"
+                            app:tint="#4FC3F7" />
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:id="@+id/tvStatusFooter"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.2"
-                            android:text="NOMINAL"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="STATUS"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="11sp"
-                            android:textStyle="bold"/>
+                            android:layout_marginStart="8dp"
+                            android:text="Status: LUNAS"
+                            android:textColor="#4FC3F7"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvPaymentDetails"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"/>
-
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <!-- Installment List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPayments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/navy_blue">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Bayar via Virtual Account"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_right"
-                        app:tint="@color/white"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+                android:layout_marginTop="24dp"
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
 
