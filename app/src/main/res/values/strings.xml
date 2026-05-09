@@ -38,7 +38,10 @@
     <string name="login_failed">Invalid credentials. Please try again.</string>
     <string name="login_success">Login Berhasil</string>
     <string name="register_title">Registrasi</string>
-    <string name="username_hint">Username</string>
+    <string name="name_hint">Nama Lengkap</string>
+    <string name="npm_hint">NPM (Nomor Pokok Mahasiswa)</string>
+    <string name="major_hint">Jurusan</string>
+    <string name="campus_email_hint">Email Kampus</string>
     <string name="confirm_password_hint">Konfirmasi Password</string>
     <string name="register_button">Simpan / Register</string>
     <string name="registration_success">Registrasi Berhasil</string>
