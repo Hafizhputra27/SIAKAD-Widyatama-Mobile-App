@@ -40,15 +40,15 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_schedule -> {
-                    showFeatureComingSoon("Schedule")
+                    loadFragment(ScheduleFragment())
                     true
                 }
                 R.id.nav_results -> {
-                    showFeatureComingSoon("Results")
+                    loadFragment(ResultsFragment())
                     true
                 }
-                R.id.nav_courses -> {
-                    showFeatureComingSoon("Courses")
+                R.id.nav_profile -> {
+                    loadFragment(ProfileFragment())
                     true
                 }
                 else -> false
