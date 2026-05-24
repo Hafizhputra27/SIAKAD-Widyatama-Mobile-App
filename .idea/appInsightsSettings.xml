@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.myapplication" />
+                  <option name="appId" value="com.widyatama.siakad" />
                   <option name="mobileSdkAppId" value="1:776966816976:android:20ae41dd92d57920b7cad5" />
                   <option name="projectId" value="siakad-widyatama" />
                   <option name="projectNumber" value="776966816976" />
