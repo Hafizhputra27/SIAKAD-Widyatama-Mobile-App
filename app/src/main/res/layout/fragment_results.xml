@@ -72,7 +72,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            app:cardBackgroundColor="#"
+                            app:cardBackgroundColor="@color/navy_blue"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="0dp">
 
