@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -9,9 +10,16 @@ import android.view.View
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private val prefs by lazy { getSharedPreferences("SIAKAD_PREFS", Context.MODE_PRIVATE) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (prefs.getBoolean("IS_LOGGED_IN", false)) {
+            navigateToDashboard(prefs.getString("NPM", "") ?: "")
+            return
+        }
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -37,9 +45,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToDashboard(username: String) {
+    private fun navigateToDashboard(npm: String) {
+        prefs.edit().apply {
+            putBoolean("IS_LOGGED_IN", true)
+            putString("NPM", npm)
+            apply()
+        }
+
         val intent = Intent(this, DashboardActivity::class.java)
-        intent.putExtra("USER_NAME", username)
+        intent.putExtra("USER_NAME", npm)
         startActivity(intent)
         finish()
     }

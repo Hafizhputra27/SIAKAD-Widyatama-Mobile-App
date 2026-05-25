@@ -10,4 +10,10 @@
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
+
+    <style name="PopupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_menu_background</item>
+        <item name="android:dropDownHorizontalOffset">-8dp</item>
+        <item name="android:dropDownVerticalOffset">8dp</item>
+    </style>
 </resources>
