@@ -108,6 +108,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/tvDashboardGpa"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/ipk_value"

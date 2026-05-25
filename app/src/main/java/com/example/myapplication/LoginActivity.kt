@@ -10,13 +10,12 @@ import android.view.View
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val prefs by lazy { getSharedPreferences("SIAKAD_PREFS", Context.MODE_PRIVATE) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (prefs.getBoolean("IS_LOGGED_IN", false)) {
-            navigateToDashboard(prefs.getString("NPM", "") ?: "")
+        if (UserSession.isLoggedIn) {
+            navigateToDashboard(UserSession.nim)
             return
         }
 
@@ -37,6 +36,11 @@ class LoginActivity : AppCompatActivity() {
             }
 
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
+            
+            // Set session data
+            UserSession.isLoggedIn = true
+            UserSession.nim = studentId
+            
             navigateToDashboard(studentId)
         }
 
@@ -46,14 +50,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToDashboard(npm: String) {
-        prefs.edit().apply {
-            putBoolean("IS_LOGGED_IN", true)
-            putString("NPM", npm)
-            apply()
-        }
-
         val intent = Intent(this, DashboardActivity::class.java)
-        intent.putExtra("USER_NAME", npm)
         startActivity(intent)
         finish()
     }

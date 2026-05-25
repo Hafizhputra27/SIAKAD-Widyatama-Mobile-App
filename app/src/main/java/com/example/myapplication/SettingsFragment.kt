@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +30,12 @@ class SettingsFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            // Handle logout logic
+            UserSession.isLoggedIn = false
+            UserSession.resetToDefault()
+            
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
             activity?.finish()
         }
     }

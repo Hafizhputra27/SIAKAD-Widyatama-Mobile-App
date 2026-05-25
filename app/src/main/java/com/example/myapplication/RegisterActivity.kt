@@ -60,6 +60,12 @@ class RegisterActivity : AppCompatActivity() {
         db.collection("mahasiswa").document(npm)
             .set(studentData)
             .addOnSuccessListener {
+                // Update UserSession with registered data
+                UserSession.name = name
+                UserSession.nim = npm
+                UserSession.major = major
+                UserSession.email = campusEmail
+
                 Toast.makeText(this, R.string.registration_success, Toast.LENGTH_SHORT).show()
                 finish()
             }

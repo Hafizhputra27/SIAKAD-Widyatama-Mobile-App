@@ -36,11 +36,14 @@ class DashboardFragment : Fragment() {
         setupCourseRecyclerView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        displayWelcomeMessage()
+    }
+
     private fun displayWelcomeMessage() {
-        val username = arguments?.getString("USER_NAME")
-        if (!username.isNullOrEmpty()) {
-            binding.tvWelcome.text = "Selamat Datang, $username"
-        }
+        binding.tvWelcome.text = "Selamat Datang, ${UserSession.name}"
+        binding.tvDashboardGpa.text = UserSession.gpa
     }
 
     private fun setupCourseRecyclerView() {

@@ -26,7 +26,20 @@ class ResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
         setupRecyclerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupUI()
+    }
+
+    private fun setupUI() {
+        binding.tvCgpa.text = UserSession.gpa
+        binding.tvTotalCredits.text = "${UserSession.sks} / 144"
+        binding.tvSemSks.text = UserSession.sks
+        binding.tvSemGpa.text = UserSession.gpa
     }
 
     private fun setupRecyclerView() {
