@@ -1,7 +1,10 @@
 package com.widyatama.siakad.ui.profile
 
+<<<<<<< HEAD:app/src/main/java/com/example/myapplication/SettingsFragment.kt
+=======
 import android.app.AlertDialog
 import android.content.Context
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973:app/src/main/java/com/widyatama/siakad/ui/profile/SettingsFragment.kt
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,7 +42,17 @@ class SettingsFragment : Fragment() {
         }
         
         binding.btnLogout.setOnClickListener {
+<<<<<<< HEAD:app/src/main/java/com/example/myapplication/SettingsFragment.kt
+            UserSession.isLoggedIn = false
+            UserSession.resetToDefault()
+            
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            activity?.finish()
+=======
             logout()
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973:app/src/main/java/com/widyatama/siakad/ui/profile/SettingsFragment.kt
         }
     }
 

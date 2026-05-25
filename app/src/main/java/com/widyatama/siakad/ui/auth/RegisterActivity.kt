@@ -64,8 +64,20 @@ class RegisterActivity : AppCompatActivity() {
             semesterBerjalan = 1
         )
 
+<<<<<<< HEAD:app/src/main/java/com/example/myapplication/RegisterActivity.kt
+        db.collection("mahasiswa").document(npm)
+            .set(studentData)
+            .addOnSuccessListener {
+                // Update UserSession with registered data
+                UserSession.name = name
+                UserSession.nim = npm
+                UserSession.major = major
+                UserSession.email = campusEmail
+
+=======
         firestoreManager.registerMahasiswa(student) { success, error ->
             if (success) {
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973:app/src/main/java/com/widyatama/siakad/ui/auth/RegisterActivity.kt
                 Toast.makeText(this, R.string.registration_success, Toast.LENGTH_SHORT).show()
                 finish()
             } else {

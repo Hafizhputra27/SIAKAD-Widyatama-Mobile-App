@@ -226,7 +226,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Semester 6"
+                        android:text="Semester 3"
                         app:chipBackgroundColor="@color/navy_blue"
                         android:textColor="@color/white" />
 
@@ -235,14 +235,14 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Semester 5" />
+                        android:text="Semester 2" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipSem4"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Semester 4" />
+                        android:text="Semester 1" />
 
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>

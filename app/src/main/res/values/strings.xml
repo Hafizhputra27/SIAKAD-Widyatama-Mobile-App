@@ -93,6 +93,69 @@
     <string name="menu_pusat_bantuan">Pusat Bantuan</string>
     <string name="menu_tentang">Tentang Aplikasi</string>
     <string name="btn_keluar">Keluar</string>
+<<<<<<< HEAD
+    <string name="login_error">Please enter Student ID and Password</string>
+    <string name="login_success">Login Successful</string>
+    <string name="empty_field_error">Please fill in all fields</string>
+    <string name="password_mismatch_error">Passwords do not match</string>
+    <string name="registration_success">Registration Successful</string>
+    <string name="register_button">Register</string>
+    <string name="register_title">Create Account</string>
+    <string name="username_hint">Username</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="go_to_login">Already have an account? Log In</string>
+    <string name="name_hint">Full Name</string>
+    <string name="npm_hint">Student ID / NPM</string>
+    <string name="major_hint">Major</string>
+    <string name="campus_email_hint">Campus Email</string>
+
+    <!-- Scan QR Dialog Strings -->
+    <string name="masuk_kelas">Masuk Kelas</string>
+    <string name="error_title">GAGAL!</string>
+    <string name="scan_success_title">BERHASIL!</string>
+    <string name="btn_retry">Coba Lagi</string>
+    <string name="btn_close">Tutup</string>
+    <string name="btn_finish">Selesai</string>
+    <string name="scan_hint">Arahkan kamera ke QR Code yang ditampilkan oleh dosen di depan kelas.</string>
+    <!-- Biodata Strings -->
+    <string name="title_biodata">Profile / Biodata</string>
+    <string name="section_personal">Data Personal</string>
+    <string name="section_contact">Informasi Kontak</string>
+    <string name="label_ktp">NOMOR KTP</string>
+    <string name="label_gender">JENIS KELAMIN</string>
+    <string name="label_birth">TEMPAT &amp; TANGGAL LAHIR</string>
+    <string name="label_religion">AGAMA</string>
+    <string name="label_nationality">KEWARGANEGARAAN</string>
+    <string name="label_email_personal">EMAIL PRIBADI</string>
+    <string name="label_phone">NO. HP</string>
+    <string name="label_address">ALAMAT LENGKAP</string>
+    <string name="verified_tag">TERVERIFIKASI</string>
+    <string name="biodata_sync_note">Data ini ditarik secara otomatis dari sistem SIAKAD.</string>
+    <string name="data_security_title">Keamanan Data</string>
+    <string name="data_security_desc">Biodata ini digunakan untuk keperluan administrasi akademik. Data Anda terlindungi oleh protokol enkripsi standar industri dan hanya dapat diakses oleh pihak berwenang sesuai dengan Kebijakan Privasi Portal Mahasiswa.</string>
+    <string name="btn_save">Simpan</string>
+    <string name="btn_reset">Reset</string>
+    <string name="title_riwayat_akademik">Profile / Riwayat Akademik</string>
+    <string name="tab_uts">UTS Grades</string>
+    <string name="tab_uas">UAS Grades</string>
+    <string name="tab_transcript">Full Transcript</string>
+    <string name="label_gpa">GPA</string>
+    <string name="label_sks_cap">SKS</string>
+    <string name="label_semester">Semester</string>
+    <string name="btn_filter">Filter</string>
+    <string name="btn_save_filter">Save Filter</string>
+    <string name="show_entries">Show %d entries</string>
+    <string name="search_hint">Search:</string>
+    <string name="col_no">NO</string>
+    <string name="col_kelas">KELAS</string>
+    <string name="col_matakuliah">MATAKULIAH</string>
+    <string name="col_kredit">Kredit</string>
+    <string name="col_nilai">Nilai</string>
+    <string name="showing_entries">Showing %1$d to %2$d of %3$d entries</string>
+    <string name="sem_genap_24_25">Genap 2024/2025</string>
+    <string name="sem_ganjil_25_26">Ganjil 2025/2026</string>
+    <string name="sem_all">Semua Semester</string>
+=======
     <string name="nav_profile">Profil</string>
 
     <string name="nav_settings">Pengaturan</string>
@@ -100,4 +163,5 @@
     <string name="mata_kuliah">Mata Kuliah</string>
     <string name="nilai_akhir">Nilai Akhir</string>
     <string name="status_lulus">Status Lulus</string>
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
 </resources>

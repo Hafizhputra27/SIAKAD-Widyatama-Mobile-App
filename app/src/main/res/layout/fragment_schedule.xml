@@ -88,12 +88,13 @@
                             app:tint="@color/navy_blue" />
 
                         <TextView
+                            android:id="@+id/tvCurrentSemester"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="12dp"
                             android:layout_toEndOf="@id/icCalendar"
-                            android:text="Genap 2025/2026"
+                            android:text="Genap 2024/2025"
                             android:textColor="@color/navy_blue"
                             android:textSize="14sp" />
 

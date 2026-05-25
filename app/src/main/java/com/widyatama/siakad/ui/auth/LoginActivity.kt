@@ -13,16 +13,24 @@ import android.view.View
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+<<<<<<< HEAD:app/src/main/java/com/example/myapplication/LoginActivity.kt
+=======
     private val prefs by lazy { getSharedPreferences("SIAKAD_PREFS", Context.MODE_PRIVATE) }
     private val firestoreManager = FirestoreManager.getInstance()
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973:app/src/main/java/com/widyatama/siakad/ui/auth/LoginActivity.kt
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+<<<<<<< HEAD:app/src/main/java/com/example/myapplication/LoginActivity.kt
+        if (UserSession.isLoggedIn) {
+            navigateToDashboard(UserSession.nim)
+=======
         if (prefs.getBoolean("IS_LOGGED_IN", false)) {
             val npm = prefs.getString("NPM", "") ?: ""
             val studentName = prefs.getString("STUDENT_NAME", "") ?: ""
             navigateToDashboard(npm, studentName)
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973:app/src/main/java/com/widyatama/siakad/ui/auth/LoginActivity.kt
             return
         }
 
@@ -42,6 +50,15 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+<<<<<<< HEAD:app/src/main/java/com/example/myapplication/LoginActivity.kt
+            Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
+            
+            // Set session data
+            UserSession.isLoggedIn = true
+            UserSession.nim = studentId
+            
+            navigateToDashboard(studentId)
+=======
             firestoreManager.loginMahasiswa(npm, password) { student, error ->
                 if (error != null) {
                     Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
@@ -50,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
                     navigateToDashboard(npm, student.name, student.semesterBerjalan)
                 }
             }
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973:app/src/main/java/com/widyatama/siakad/ui/auth/LoginActivity.kt
         }
 
         binding.tvForgotPassword.setOnClickListener {
@@ -57,6 +75,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+<<<<<<< HEAD:app/src/main/java/com/example/myapplication/LoginActivity.kt
+    private fun navigateToDashboard(npm: String) {
+=======
     private fun navigateToDashboard(npm: String, studentName: String, semester: Int = 1) {
         prefs.edit().apply {
             putBoolean("IS_LOGGED_IN", true)
@@ -66,8 +87,8 @@ class LoginActivity : AppCompatActivity() {
             apply()
         }
 
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973:app/src/main/java/com/widyatama/siakad/ui/auth/LoginActivity.kt
         val intent = Intent(this, DashboardActivity::class.java)
-        intent.putExtra("USER_NAME", npm)
         startActivity(intent)
         finish()
     }

@@ -21,11 +21,7 @@ class DashboardActivity : AppCompatActivity() {
         setupBottomNavigation()
 
         if (savedInstanceState == null) {
-            loadFragment(DashboardFragment().apply {
-                arguments = Bundle().apply {
-                    putString("USER_NAME", intent.getStringExtra("USER_NAME"))
-                }
-            })
+            loadFragment(DashboardFragment())
         }
     }
 
@@ -33,11 +29,7 @@ class DashboardActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_dashboard -> {
-                    loadFragment(DashboardFragment().apply {
-                        arguments = Bundle().apply {
-                            putString("USER_NAME", intent.getStringExtra("USER_NAME"))
-                        }
-                    })
+                    loadFragment(DashboardFragment())
                     true
                 }
                 R.id.nav_admin -> {

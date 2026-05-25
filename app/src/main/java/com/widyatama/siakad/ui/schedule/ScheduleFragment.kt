@@ -36,11 +36,21 @@ class ScheduleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
         setupRecyclerView()
         setupDayChips()
         loadCoursesFromFirestore()
         
         binding.chipMonday.performClick()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupUI()
+    }
+
+    private fun setupUI() {
+        binding.tvCurrentSemester.text = UserSession.semester
     }
 
     private fun setupRecyclerView() {

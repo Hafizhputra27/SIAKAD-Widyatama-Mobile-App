@@ -69,7 +69,11 @@
                     app:layout_constraintEnd_toEndOf="@id/iv_avatar" />
 
                 <TextView
+<<<<<<< HEAD
+                    android:id="@+id/tvProfileName"
+=======
                     android:id="@+id/tv_profile_name"
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -83,7 +87,11 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
 
                 <TextView
+<<<<<<< HEAD
+                    android:id="@+id/tvProfileNim"
+=======
                     android:id="@+id/tv_profile_npm"
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -95,7 +103,11 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_profile_name" />
 
                 <TextView
+<<<<<<< HEAD
+                    android:id="@+id/tvProfileMajor"
+=======
                     android:id="@+id/tv_profile_major"
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -192,7 +204,11 @@
                     android:orientation="horizontal">
 
                     <TextView
+<<<<<<< HEAD
+                        android:id="@+id/tvProfileGpa"
+=======
                         android:id="@+id/tv_ipk_value"
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="3.82"
@@ -253,10 +269,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+<<<<<<< HEAD
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvProfileSks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sks_value"
+                        android:textColor="@color/navy_blue"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="6dp"
+                        android:text="@string/sks_max"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="12dp"
+                    android:progress="79"
+                    android:progressTint="@color/blue_light" />
+=======
                     android:text="72/144"
                     android:textColor="@color/navy_blue"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -292,10 +340,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+<<<<<<< HEAD
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvProfileSemester"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/semester_value"
+                        android:textColor="@color/navy_blue"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_trending_up"
+                        app:tint="@color/blue_light" />
+                </LinearLayout>
+=======
                     android:text="4"
                     android:textColor="@color/navy_blue"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -307,9 +377,16 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+<<<<<<< HEAD
+        <!-- Menu List -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnBiodata"
+            android:layout_width="match_parent"
+=======
         <TextView
             android:id="@+id/tv_section_navigasi"
             android:layout_width="wrap_content"
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="MENU"
@@ -391,9 +468,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
+<<<<<<< HEAD
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnRiwayatAkademik"
+            android:layout_width="match_parent"
+=======
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/item_menu_riwayat_akademik"
             android:layout_width="0dp"
+>>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="12dp"
