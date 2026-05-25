@@ -6,18 +6,18 @@
         android:title="@string/nav_dashboard"/>
     <item
         android:id="@+id/nav_admin"
-        android:icon="@drawable/ic_admin"
+        android:icon="@drawable/ic_administrasi"
         android:title="@string/nav_admin"/>
     <item
         android:id="@+id/nav_schedule"
-        android:icon="@drawable/ic_schedule"
+        android:icon="@drawable/ic_calendar"
         android:title="@string/nav_schedule"/>
     <item
         android:id="@+id/nav_results"
         android:icon="@drawable/ic_results"
         android:title="@string/nav_results"/>
     <item
-        android:id="@+id/nav_courses"
-        android:icon="@drawable/ic_courses"
-        android:title="@string/nav_courses"/>
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/nav_profile"/>
 </menu>
