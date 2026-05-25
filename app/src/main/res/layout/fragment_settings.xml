@@ -540,5 +540,15 @@
             </FrameLayout>
         </androidx.cardview.widget.CardView>
 
+        <Button
+            android:id="@+id/btnSeedDatabase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="🔧 Seed Database (Dev Only)"
+            android:backgroundTint="#FF5722"
+            android:textColor="#FFFFFF"
+            android:visibility="visible"/>
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

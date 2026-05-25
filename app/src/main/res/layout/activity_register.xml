@@ -12,20 +12,21 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="352dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/mainhall"/>
+            android:src="@drawable/mainhall" />
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#80FFFFFF"/>
+            android:layout_width="380dp"
+            android:layout_height="974dp"
+            android:background="#80FFFFFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="24dp"
+            android:layout_marginBottom="24dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -49,15 +50,15 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="144dp"
+                            android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
-                            android:src="@drawable/logo_widyatama"/>
+                            android:src="@drawable/logo_widyatama" />
 
                         <ImageView
-                            android:layout_width="60dp"
+                            android:layout_width="139dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/logo_diktisaintek"/>
+                            android:src="@drawable/logo_diktisaintek" />
 
                     </LinearLayout>
 
