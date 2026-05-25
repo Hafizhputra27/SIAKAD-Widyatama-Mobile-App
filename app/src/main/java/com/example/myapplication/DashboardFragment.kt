@@ -26,6 +26,12 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        binding.cardScanPresensi.setOnClickListener {
+            val scanDialog = ScanDialogFragment.newInstance()
+            scanDialog.show(childFragmentManager, ScanDialogFragment.TAG)
+        }
+
         displayWelcomeMessage()
         setupCourseRecyclerView()
     }

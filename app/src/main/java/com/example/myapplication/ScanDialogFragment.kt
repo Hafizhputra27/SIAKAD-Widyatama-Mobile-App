@@ -31,6 +31,7 @@ class ScanDialogFragment : DialogFragment() {
     
     private lateinit var cameraExecutor: ExecutorService
     private var isScanning = true
+    private val scanner = BarcodeScanning.getClient()
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -38,7 +39,7 @@ class ScanDialogFragment : DialogFragment() {
         if (isGranted) {
             startCamera()
         } else {
-            Toast.makeText(requireContext(), "Camera permission is required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Izin kamera diperlukan untuk scan", Toast.LENGTH_SHORT).show()
             dismiss()
         }
     }
@@ -103,7 +104,7 @@ class ScanDialogFragment : DialogFragment() {
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageAnalyzer
+                    viewLifecycleOwner, cameraSelector, preview, imageAnalyzer
                 )
             } catch (exc: Exception) {
                 Log.e("ScanDialogFragment", "Use case binding failed", exc)
@@ -122,17 +123,16 @@ class ScanDialogFragment : DialogFragment() {
         val mediaImage = imageProxy.image
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-            val scanner = BarcodeScanning.getClient()
 
             scanner.process(image)
                 .addOnSuccessListener { barcodes ->
-                    for (barcode in barcodes) {
+                    if (barcodes.isNotEmpty() && isScanning) {
+                        val barcode = barcodes[0]
                         if (barcode.valueType == Barcode.TYPE_TEXT || barcode.valueType == Barcode.TYPE_URL) {
                             isScanning = false
-                            activity?.runOnUiThread {
+                            if (isAdded) {
                                 showSuccessDialog()
                             }
-                            break
                         }
                     }
                 }
@@ -166,6 +166,7 @@ class ScanDialogFragment : DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         cameraExecutor.shutdown()
+        scanner.close()
         _binding = null
     }
 

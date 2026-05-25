@@ -92,4 +92,8 @@
     <string name="username_hint">Username</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="go_to_login">Already have an account? Log In</string>
+    <string name="name_hint">Full Name</string>
+    <string name="npm_hint">Student ID / NPM</string>
+    <string name="major_hint">Major</string>
+    <string name="campus_email_hint">Campus Email</string>
 </resources>
