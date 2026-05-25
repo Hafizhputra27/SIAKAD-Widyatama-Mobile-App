@@ -28,6 +28,13 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         displayWelcomeMessage()
         setupCourseRecyclerView()
+        setupScanButton()
+    }
+
+    private fun setupScanButton() {
+        binding.cardScanPresensi.setOnClickListener {
+            ScanDialogFragment.newInstance().show(childFragmentManager, ScanDialogFragment.TAG)
+        }
     }
 
     private fun displayWelcomeMessage() {
