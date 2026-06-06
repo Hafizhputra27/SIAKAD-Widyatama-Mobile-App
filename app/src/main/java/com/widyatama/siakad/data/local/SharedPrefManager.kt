@@ -28,5 +28,48 @@ class SharedPrefManager private constructor(context: Context) {
     var semester: Int get() = prefs.getInt(AppConstants.KEY_SEMESTER, 1)
         set(value) = prefs.edit().putInt(AppConstants.KEY_SEMESTER, value).apply()
 
+    fun saveDarkMode(enabled: Boolean) {
+        prefs.edit().putBoolean("dark_mode", enabled).apply()
+    }
+
+    fun getDarkMode(): Boolean = prefs.getBoolean("dark_mode", false)
+
+    fun savePushNotif(enabled: Boolean) {
+        prefs.edit().putBoolean("push_notif", enabled).apply()
+    }
+
+    fun getPushNotif(): Boolean = prefs.getBoolean("push_notif", true)
+
+    fun saveEmailNotif(enabled: Boolean) {
+        prefs.edit().putBoolean("email_notif", enabled).apply()
+    }
+
+    fun getEmailNotif(): Boolean = prefs.getBoolean("email_notif", false)
+
+    // ── Notification timestamps ──────────────────────────────
+    fun getLastSeenPengumuman(): Long = prefs.getLong("last_seen_pengumuman", 0L)
+    fun setLastSeenPengumuman(timestamp: Long) {
+        prefs.edit().putLong("last_seen_pengumuman", timestamp).apply()
+    }
+
+    fun getLastSeenTagihan(): Long = prefs.getLong("last_seen_tagihan", 0L)
+    fun setLastSeenTagihan(timestamp: Long) {
+        prefs.edit().putLong("last_seen_tagihan", timestamp).apply()
+    }
+
+    fun getLastSeenPresensi(): Long = prefs.getLong("last_seen_presensi", 0L)
+    fun setLastSeenPresensi(timestamp: Long) {
+        prefs.edit().putLong("last_seen_presensi", timestamp).apply()
+    }
+
+    fun markAllNotificationsAsRead() {
+        val now = System.currentTimeMillis()
+        prefs.edit()
+            .putLong("last_seen_pengumuman", now)
+            .putLong("last_seen_tagihan", now)
+            .putLong("last_seen_presensi", now)
+            .apply()
+    }
+
     fun clearSession() = prefs.edit().clear().apply()
 }

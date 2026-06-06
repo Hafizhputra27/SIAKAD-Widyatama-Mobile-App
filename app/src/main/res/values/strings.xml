@@ -27,12 +27,30 @@
     <string name="announcement_2_time">5 jam yang lalu</string>
     <string name="announcement_3_title">Pembayaran UKT Tahap 2</string>
     <string name="announcement_3_time">1 hari yang lalu</string>
+    <string name="announcement_empty">Tidak ada pengumuman</string>
     
+    <!-- QR Scanner Strings -->
+    <string name="qr_scan_title">Scan QR Presensi</string>
+    <string name="qr_instruction">Arahkan kamera ke QR Code</string>
+    <string name="qr_sub_instruction">Pastikan QR terlihat jelas di dalam bingkai</string>
+    <string name="qr_verifying">Memverifikasi kehadiran…</string>
+    <string name="qr_success_title">Absensi Berhasil!</string>
+    <string name="qr_duplicate_title">Sudah Tercatat</string>
+    <string name="qr_invalid_title">QR Tidak Valid</string>
+    <string name="qr_expired_title">QR Kedaluwarsa</string>
+    <string name="qr_inactive_title">QR Tidak Aktif</string>
+    <string name="qr_not_enrolled_title">Tidak Terdaftar</string>
+    <string name="qr_error_network">Gagal Verifikasi</string>
+    <string name="btn_scan_again">Scan Lagi</string>
+    <string name="btn_back_to_dashboard">Kembali ke Dashboard</string>
+
     <string name="nav_dashboard">Dashboard</string>
     <string name="nav_admin">Admin</string>
     <string name="nav_schedule">Jadwal</string>
     <string name="nav_results">Nilai</string>
     <string name="nav_courses">Mata Kuliah</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_settings">Pengaturan</string>
     
     <string name="login_error">Please enter Student ID and Password</string>
     <string name="login_failed">Invalid credentials. Please try again.</string>
@@ -93,9 +111,53 @@
     <string name="menu_pusat_bantuan">Pusat Bantuan</string>
     <string name="menu_tentang">Tentang Aplikasi</string>
     <string name="btn_keluar">Keluar</string>
-    <string name="nav_profile">Profil</string>
 
-    <string name="nav_settings">Pengaturan</string>
+    <!-- Scan QR Dialog Strings -->
+    <string name="masuk_kelas">Masuk Kelas</string>
+    <string name="error_title">GAGAL!</string>
+    <string name="scan_success_title">BERHASIL!</string>
+    <string name="btn_retry">Coba Lagi</string>
+    <string name="btn_close">Tutup</string>
+    <string name="btn_finish">Selesai</string>
+    <string name="scan_hint">Arahkan kamera ke QR Code yang ditampilkan oleh dosen di depan kelas.</string>
+    <!-- Biodata Strings -->
+    <string name="title_biodata">Profile / Biodata</string>
+    <string name="section_personal">Data Personal</string>
+    <string name="section_contact">Informasi Kontak</string>
+    <string name="label_ktp">NOMOR KTP</string>
+    <string name="label_gender">JENIS KELAMIN</string>
+    <string name="label_birth">TEMPAT &amp; TANGGAL LAHIR</string>
+    <string name="label_religion">AGAMA</string>
+    <string name="label_nationality">KEWARGANEGARAAN</string>
+    <string name="label_email_personal">EMAIL PRIBADI</string>
+    <string name="label_phone">NO. HP</string>
+    <string name="label_address">ALAMAT LENGKAP</string>
+    <string name="verified_tag">TERVERIFIKASI</string>
+    <string name="biodata_sync_note">Data ini ditarik secara otomatis dari sistem SIAKAD.</string>
+    <string name="data_security_title">Keamanan Data</string>
+    <string name="data_security_desc">Biodata ini digunakan untuk keperluan administrasi akademik. Data Anda terlindungi oleh protokol enkripsi standar industri dan hanya dapat diakses oleh pihak berwenang sesuai dengan Kebijakan Privasi Portal Mahasiswa.</string>
+    <string name="btn_save">Simpan</string>
+    <string name="btn_reset">Reset</string>
+    <string name="title_riwayat_akademik">Profile / Riwayat Akademik</string>
+    <string name="tab_uts">UTS Grades</string>
+    <string name="tab_uas">UAS Grades</string>
+    <string name="tab_transcript">Full Transcript</string>
+    <string name="label_gpa">GPA</string>
+    <string name="label_sks_cap">SKS</string>
+    <string name="label_semester">Semester</string>
+    <string name="btn_filter">Filter</string>
+    <string name="btn_save_filter">Save Filter</string>
+    <string name="show_entries">Show %d entries</string>
+    <string name="search_hint">Search:</string>
+    <string name="col_no">NO</string>
+    <string name="col_kelas">KELAS</string>
+    <string name="col_matakuliah">MATAKULIAH</string>
+    <string name="col_kredit">Kredit</string>
+    <string name="col_nilai">Nilai</string>
+    <string name="showing_entries">Showing %1$d to %2$d of %3$d entries</string>
+    <string name="sem_genap_24_25">Genap 2024/2025</string>
+    <string name="sem_ganjil_25_26">Ganjil 2025/2026</string>
+    <string name="sem_all">Semua Semester</string>
 
     <string name="mata_kuliah">Mata Kuliah</string>
     <string name="nilai_akhir">Nilai Akhir</string>

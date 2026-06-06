@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@color/background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -11,149 +12,171 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Welcome Banner with Purple Background -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/mainhall"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#40FFFFFF"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_dashboard_banner">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="48dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="48dp"
+                android:paddingBottom="40dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/university_name"
-                        android:textColor="@color/navy_blue"
-                        android:textSize="13sp"/>
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvWelcome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/welcome_text"
-                        android:textColor="@color/navy_blue"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/university_name"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="#B0FFFFFF" />
 
-                    <TextView
-                        android:id="@+id/tvDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Senin, 12 Mei 2025"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp"/>
+                        <TextView
+                            android:id="@+id/tvWelcome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/welcome_text"
+                            android:textAppearance="@style/TextAppearance.MyApplication.HeadlineMedium"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tvDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Senin, 12 Mei 2025"
+                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                            android:textColor="#B0FFFFFF" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/flNotificationIcon"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_notification"
+                            app:tint="@color/white"
+                            android:contentDescription="Notification icon" />
+
+                        <View
+                            android:id="@+id/viewNotificationBadge"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:layout_gravity="top|end"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@drawable/bg_status_circle"
+                            android:backgroundTint="@color/error"
+                            android:visibility="gone" />
+                    </FrameLayout>
                 </LinearLayout>
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_profile"
-                    app:tint="@color/navy_blue"/>
             </LinearLayout>
-
         </FrameLayout>
 
+        <!-- Content Cards -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-24dp"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingHorizontal="16dp">
 
+            <!-- IPK & Scan Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <!-- IPK Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
+                    app:cardBackgroundColor="@color/surface"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="3dp"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardElevation="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:text="@string/ipk_label"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="@color/text_secondary" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/tvIpk"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ipk_label"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp"/>
+                                android:text="@string/ipk_value"
+                                android:textAppearance="@style/TextAppearance.MyApplication.DisplayMedium"
+                                android:textColor="@color/secondary"
+                                android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/tvIpk"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/ipk_value"
-                                    android:textColor="@color/green_success"
-                                    android:textSize="28sp"
-                                    android:textStyle="bold"/>
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="4dp"
-                                    android:src="@drawable/ic_trending_up"
-                                    app:tint="@color/green_success"/>
-                            </LinearLayout>
-
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="6dp"
+                                android:src="@drawable/ic_trending_up"
+                                app:tint="@color/success"
+                                android:contentDescription="Trending up" />
                         </LinearLayout>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Semester 4"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="@color/text_hint" />
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- Scan Presensi Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardScanPresensi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/navy_blue"
+                    app:cardBackgroundColor="@color/primary"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="3dp">
+                    app:cardElevation="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -163,38 +186,37 @@
                         android:padding="16dp">
 
                         <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:src="@drawable/ic_qr_code"
-                            app:tint="@color/white"/>
+                            app:tint="@color/white"
+                            android:contentDescription="QR Code" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="@string/scan_presensi"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
                             android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="Tap untuk scan"
-                            android:textColor="#B0FFFFFF"
-                            android:textSize="10sp"/>
-
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="#B0FFFFFF" />
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
-
             </LinearLayout>
 
+            <!-- Schedule Today Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="28dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -209,9 +231,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/schedule_today"
-                        android:textColor="@color/navy_blue"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                        android:textColor="@color/text_primary" />
 
                     <TextView
                         android:id="@+id/tvJadwalSubtitle"
@@ -219,63 +240,30 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="3 mata kuliah"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp"/>
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                        android:textColor="@color/text_secondary" />
                 </LinearLayout>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardZoomSchedule"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/white">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="12dp"
-                        android:paddingVertical="6dp">
-
-                        <ImageView
-                            android:id="@+id/ivZoomSchedule"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/ic_zoom_in"
-                            app:tint="@color/navy_blue"/>
-
-                        <TextView
-                            android:id="@+id/tvScheduleZoomLevel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="100%"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="12sp"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
+            <!-- Course List -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCourses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="false" />
 
+            <!-- Empty Schedule State -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardEmptyJadwal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:visibility="gone"
+                app:cardBackgroundColor="@color/surface"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -288,32 +276,34 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:src="@drawable/ic_calendar"
-                        app:tint="@color/text_hint"/>
+                        app:tint="@color/text_hint"
+                        android:contentDescription="Empty schedule" />
 
                     <TextView
                         android:id="@+id/tvEmptyJadwal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
+                        android:gravity="center"
                         android:text="Tidak ada jadwal kuliah hari ini"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="14sp"
-                        android:gravity="center"/>
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                        android:textColor="@color/text_secondary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="Selamat beristirahat!"
-                        android:textColor="@color/text_hint"
-                        android:textSize="12sp"/>
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="@color/text_hint" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Announcements Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="28dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -322,168 +312,43 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/announcements_title"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                    android:textColor="@color/text_primary" />
 
                 <TextView
+                    android:id="@+id/tvViewAllAnnouncements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/view_all"
-                    android:textColor="@color/blue_light"
-                    android:textSize="14sp"/>
+                    android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                    android:textColor="@color/primary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground" />
             </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <!-- Announcement List Preview (Max 3 items) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPengumumanPreview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_megaphone"
-                        app:tint="@color/orange_accent"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/announcement_1_title"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/announcement_1_time"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_calendar"
-                        app:tint="@color/navy_blue"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/announcement_2_title"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/announcement_2_time"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/white">
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_megaphone"
-                        app:tint="@color/navy_blue"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/announcement_3_title"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/announcement_3_time"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
+            <!-- Empty announcement state -->
+            <TextView
+                android:id="@+id/tvEmptyPengumuman"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="Tidak ada pengumuman"
+                android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                android:textColor="@color/text_secondary"
+                android:visibility="gone" />
         </LinearLayout>
-
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

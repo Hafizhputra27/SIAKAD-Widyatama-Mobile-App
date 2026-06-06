@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Purple Header -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            app:elevation="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/surface" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/btnBack"
+                    android:text="@string/title_riwayat_akademik"
+                    android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                    android:textColor="@color/surface" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_settings"
+                        app:tint="@color/surface" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_person"
+                        app:civ_border_color="@color/secondary"
+                        app:civ_border_width="2dp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Tabs -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/surface"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/primary"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/primary"
+            app:tabTextColor="@color/text_secondary">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_uts" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_uas" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_transcript" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Semester Filter -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/spinnerSemester"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="1dp"
+                        app:strokeColor="@color/text_hint"
+                        app:strokeWidth="1dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingHorizontal="12dp">
+
+                            <TextView
+                                android:id="@+id/tvSelectedSemester"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="Genap 2025/2026"
+                                android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                android:textColor="@color/text_primary" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_expand_more"
+                                app:tint="@color/primary" />
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReset"
+                        style="@style/Widget.MyApplication.Button.Outlined"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="@string/btn_reset" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFilter"
+                        style="@style/Widget.MyApplication.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/btn_filter" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSaveFilter"
+                        style="@style/Widget.MyApplication.Button.Outlined"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/btn_save_filter" />
+                </LinearLayout>
+
+                <!-- Entries & Search -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Show"
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="@color/text_secondary" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="50dp"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="8dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/text_hint"
+                        app:strokeWidth="1dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="10"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="@color/text_primary" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="entries"
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MyApplication.TextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/search_hint">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                        android:textColor="@color/text_primary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Data Table -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+
+                            <TableLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:stretchColumns="*">
+
+                                <!-- Header Row -->
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/background">
+
+                                    <TextView
+                                        android:padding="12dp"
+                                        android:text="@string/col_no"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:gravity="center_vertical"
+                                        android:padding="12dp">
+
+                                        <TextView
+                                            android:text="@string/col_kelas"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
+                                        <ImageView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:layout_marginStart="4dp"
+                                            android:src="@drawable/ic_sort"
+                                            app:tint="@color/text_hint" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:gravity="center_vertical"
+                                        android:padding="12dp">
+
+                                        <TextView
+                                            android:text="@string/col_matakuliah"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
+                                        <ImageView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:layout_marginStart="4dp"
+                                            android:src="@drawable/ic_sort"
+                                            app:tint="@color/text_hint" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:gravity="center_vertical"
+                                        android:padding="12dp">
+
+                                        <TextView
+                                            android:text="@string/col_kredit"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
+                                        <ImageView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:layout_marginStart="4dp"
+                                            android:src="@drawable/ic_sort"
+                                            app:tint="@color/text_hint" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:gravity="center_vertical"
+                                        android:padding="12dp">
+
+                                        <TextView
+                                            android:text="@string/col_nilai"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
+                                        <ImageView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:layout_marginStart="4dp"
+                                            android:src="@drawable/ic_sort"
+                                            app:tint="@color/text_hint" />
+                                    </LinearLayout>
+                                </TableRow>
+
+                                <!-- Data Rows -->
+                                <TableRow>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="1"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="B"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="ENG62110 - Statistika"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="3"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="80.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+                                </TableRow>
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
+
+                                <TableRow>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="2"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="B"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="SIF61114 - [e] e-Government"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="2"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="75.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+                                </TableRow>
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
+
+                                <TableRow>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="3"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="A"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="SIF62115 - Sains Data"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="3"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="80.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+                                </TableRow>
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
+
+                                <TableRow>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="4"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="A"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="SIF62116 - [e] Pengantar Kecerdasan Buatan"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="2"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="84.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+                                </TableRow>
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
+
+                            </TableLayout>
+                        </HorizontalScrollView>
+
+                        <!-- Table Footer -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/surface"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Showing 1 to 4 of 8 entries"
+                                android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                android:textColor="@color/text_secondary" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginTop="12dp"
+                                app:cardBackgroundColor="@color/primary"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="0dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="1"
+                                    android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                    android:textColor="@color/surface"
+                                    android:textStyle="bold" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Summary at bottom: SKS total, IPK semester -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/primary"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_gpa"
+                                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                                android:textColor="@color/surface" />
+
+                            <TextView
+                                android:id="@+id/tvGpaValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="3.88"
+                                android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                                android:textColor="@color/surface"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/secondary"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_sks_cap"
+                                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                                android:textColor="@color/surface" />
+
+                            <TextView
+                                android:id="@+id/tvSksValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="24"
+                                android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                                android:textColor="@color/surface"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <!-- Filter Overlay -->
+    <View
+        android:id="@+id/overlayBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/overlay_dark"
+        android:visibility="gone" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardFilterOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/surface"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:background="@color/text_hint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Semester"
+                android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/optionGenap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:text="@string/sem_genap_24_25"
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+                    android:textColor="@color/text_primary" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/optionGanjil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:text="@string/sem_ganjil_25_26"
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+                    android:textColor="@color/text_primary" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/optionSemua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="12dp"
+                    android:text="@string/sem_all"
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+                    android:textColor="@color/text_primary" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCloseOverlay"
+                style="@style/Widget.MyApplication.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Tutup" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

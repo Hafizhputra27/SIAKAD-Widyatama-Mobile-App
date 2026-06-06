@@ -1,21 +1,20 @@
 package com.widyatama.siakad.data.model
 
-import com.google.firebase.Timestamp
+import com.google.firebase.firestore.PropertyName
+import java.util.Date
 
 data class Payment(
-    val tagihanId: String = "",
-    val judul: String = "",
-    val tahunAjaran: String = "",
-    val nominal: Long = 0L,
-    val diskon: Long = 0L,
-    val batasWaktu: Timestamp? = null,
-    val status: String = "BELUM_LUNAS",
-    val tipe: String = "TAGIHAN",
-    val tanggalBayar: Timestamp? = null
-)
-
-data class PaymentItem(
-    val name: String = "",
-    val amount: Long = 0,
-    val status: String = "BELUM BAYAR"
+    val id: String = "",
+    @get:PropertyName("judul") val title: String = "",
+    @get:PropertyName("tipe") val type: String = "",
+    @get:PropertyName("total") val total: Int = 0,
+    @get:PropertyName("jatuhTempo") val dueDate: Date? = null,
+    @get:PropertyName("tanggalBayar") val paymentDate: Date? = null,
+    @get:PropertyName("paymentMethod") val paymentMethod: String = "",
+    @get:PropertyName("status") val status: String = "",
+    @get:PropertyName("isLunas") val isPaid: Boolean = false,
+    @get:PropertyName("tahunAjaran") val academicYear: String = "",
+    @get:PropertyName("semester") val semester: Int = 0,
+    @get:PropertyName("diskon") val discount: Int = 0,
+    @get:PropertyName("createdAt") val createdAt: Date? = null
 )

@@ -1,0 +1,56 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "hari", "order": "ASCENDING" },
+        { "fieldPath": "semester", "order": "ASCENDING" },
+        { "fieldPath": "isActive", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "semester", "order": "ASCENDING" },
+        { "fieldPath": "isActive", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "presensi",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "npm", "order": "ASCENDING" },
+        { "fieldPath": "mataKuliahId", "order": "ASCENDING" },
+        { "fieldPath": "pertemuanId", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "presensi",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "npm", "order": "ASCENDING" },
+        { "fieldPath": "mataKuliahId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "pengumuman",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "isAktif", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "tagihan",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "tanggalBayar", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

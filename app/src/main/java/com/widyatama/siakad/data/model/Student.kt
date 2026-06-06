@@ -13,5 +13,14 @@ data class Student(
     val ipkKumulatif: Double = 0.0,
     val totalSksLulus: Int = 0,
     val totalSksTarget: Int = 0,
-    val semesterBerjalan: Int = 1
+    val semesterBerjalan: Int = 1,
+    // Biodata fields (new)
+    val ktp: String = "",
+    val gender: String = "",
+    val birthDate: String = "",
+    val religion: String = "",
+    val nationality: String = "",
+    val personalEmail: String = "",
+    val phone: String = "",
+    val address: String = ""
 )

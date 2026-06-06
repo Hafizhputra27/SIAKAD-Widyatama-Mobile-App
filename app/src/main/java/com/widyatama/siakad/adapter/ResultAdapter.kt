@@ -6,9 +6,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.widyatama.siakad.R
 import com.widyatama.siakad.databinding.ItemResultCourseBinding
-import com.widyatama.siakad.data.model.CourseResult
+import com.widyatama.siakad.data.model.AcademicResult
 
-class ResultAdapter(private val results: List<CourseResult>) :
+class ResultAdapter(private val results: List<AcademicResult>) :
     RecyclerView.Adapter<ResultAdapter.ResultViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
@@ -29,25 +29,23 @@ class ResultAdapter(private val results: List<CourseResult>) :
     class ResultViewHolder(private val binding: ItemResultCourseBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(result: CourseResult) {
-            binding.tvCourseName.text = result.name
+        fun bind(result: AcademicResult) {
+            binding.tvCourseName.text = "${result.courseCode} - ${result.courseName}"
             binding.tvSks.text = "${result.sks} SKS"
             binding.tvMutu.text = "Mutu: ${result.mutu}"
             binding.tvGrade.text = result.grade
 
             // Set color based on grade
-            val colorRes = when (result.grade) {
-                "A" -> R.color.green_success
-                "B+" -> R.color.navy_blue
-                "B" -> R.color.blue_light
-                else -> R.color.text_secondary
+            val (textColor, bgColor) = when (result.grade) {
+                "A" -> Pair(ContextCompat.getColor(binding.root.context, R.color.success), 0xFFDCFCE7.toInt())
+                "B+", "B" -> Pair(ContextCompat.getColor(binding.root.context, R.color.info), 0xFFDBEAFE.toInt())
+                "C" -> Pair(0xFFEAB308.toInt(), 0xFFFEF9C3.toInt())
+                "D" -> Pair(ContextCompat.getColor(binding.root.context, R.color.secondary), 0xFFFFEDD5.toInt())
+                "E" -> Pair(ContextCompat.getColor(binding.root.context, R.color.error), 0xFFFEE2E2.toInt())
+                else -> Pair(ContextCompat.getColor(binding.root.context, R.color.text_secondary), 0xFFF3F4F6.toInt())
             }
-            binding.tvGrade.setTextColor(ContextCompat.getColor(binding.root.context, colorRes))
-            
-            // Set icon if available
-            result.iconRes?.let {
-                binding.ivCourseIcon.setImageResource(it)
-            }
+            binding.tvGrade.setTextColor(textColor)
+            binding.cvGradeBadge.setCardBackgroundColor(bgColor)
         }
     }
 }
