@@ -2,12 +2,10 @@ package com.widyatama.siakad.ui.dashboard
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,12 +14,16 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.widyatama.siakad.R
 import com.widyatama.siakad.adapter.CourseAdapter
+import com.widyatama.siakad.adapter.NotificationAdapter
+import com.widyatama.siakad.adapter.PengumumanAdapter
+import com.widyatama.siakad.data.local.SharedPrefManager
 import com.widyatama.siakad.data.remote.FirestoreManager
 import com.widyatama.siakad.databinding.FragmentDashboardBinding
-import com.widyatama.siakad.data.model.Course
 import com.widyatama.siakad.ui.attendance.QrScannerActivity
 import com.widyatama.siakad.ui.auth.LoginActivity
 import java.text.SimpleDateFormat
@@ -34,17 +36,15 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
 
-    private val prefs by lazy {
-        requireActivity().getSharedPreferences("SIAKAD_PREFS", Context.MODE_PRIVATE)
-    }
-
-    private val firestoreManager = FirestoreManager.getInstance()
+    private val sharedPref by lazy { SharedPrefManager.getInstance(requireContext()) }
+    private val viewModel: DashboardViewModel by viewModels()
     private lateinit var courseAdapter: CourseAdapter
+    private lateinit var pengumumanAdapter: PengumumanAdapter
+    private lateinit var notificationAdapter: NotificationAdapter
 
     private var currentScheduleZoom = 100
     private val minZoom = 80
     private val maxZoom = 150
-    private val zoomStep = 10
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -65,7 +65,7 @@ class DashboardFragment : Fragment() {
             val mataKuliah = data?.getStringExtra("mataKuliah") ?: ""
             if (status == "SUCCESS") {
                 Toast.makeText(context, "Presensi berhasil! $mataKuliah", Toast.LENGTH_LONG).show()
-                loadJadwalHariIni()
+                refreshDashboardData()
             } else {
                 val error = data?.getStringExtra("error") ?: "Gagal scan presensi"
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show()
@@ -85,11 +85,23 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDateHeader()
-        displayWelcomeMessage()
         setupCourseRecyclerView()
-        setupScheduleZoom()
-        loadJadwalHariIni()
+        setupPengumumanPreview()
+        setupNotificationIcon()
         setupScanPresensiButton()
+        setupObservers()
+        checkNetworkStatus()
+        loadDashboardData()
+    }
+
+    private fun checkNetworkStatus() {
+        if (!com.widyatama.siakad.core.utils.NetworkUtils.isConnected(requireContext())) {
+            com.google.android.material.snackbar.Snackbar.make(
+                binding.root,
+                "Tidak ada koneksi internet. Menampilkan data tersimpan.",
+                com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
     private fun setupDateHeader() {
@@ -113,73 +125,84 @@ class DashboardFragment : Fragment() {
         binding.tvDate.text = "$hariIni, $tanggal $bulan"
     }
 
-    private fun displayWelcomeMessage() {
-        val npm = prefs.getString("NPM", "") ?: ""
-        if (npm.isNotEmpty()) {
-            firestoreManager.getMahasiswa(npm) { student, error ->
-                activity?.runOnUiThread {
-                    if (error != null || student == null) {
-                        Log.e("DashboardFragment", "Failed to load student: $error")
-                        val username = arguments?.getString("USER_NAME")
-                        if (!username.isNullOrEmpty()) {
-                            binding.tvWelcome.text = "Selamat Datang, $username"
-                        }
-                    } else {
-                        binding.tvWelcome.text = "Selamat Datang, ${student.name}"
-                        binding.tvIpk.text = String.format("%.2f", student.ipkKumulatif)
-                        prefs.edit().putInt("CURRENT_SEMESTER", student.semesterBerjalan).apply()
-                    }
+    private fun setupObservers() {
+        viewModel.studentData.observe(viewLifecycleOwner) { student ->
+            if (student != null) {
+                binding.tvWelcome.text = "Selamat Datang, ${student.name}"
+                binding.tvIpk.text = String.format(Locale("id", "ID"), "%.2f", student.ipkKumulatif)
+                sharedPref.semester = student.semesterBerjalan
+            } else {
+                val name = sharedPref.name
+                binding.tvWelcome.text = if (name.isNotEmpty()) "Selamat Datang, $name" else "Selamat Datang"
+            }
+        }
+
+        viewModel.todayCourses.observe(viewLifecycleOwner) { courses ->
+            binding.tvJadwalSubtitle.text = "${courses.size} mata kuliah"
+            if (courses.isEmpty()) {
+                binding.rvCourses.visibility = View.GONE
+                binding.cardEmptyJadwal.visibility = View.VISIBLE
+                binding.tvEmptyJadwal.text = "Tidak ada jadwal kuliah hari ini"
+            } else {
+                binding.rvCourses.visibility = View.VISIBLE
+                binding.cardEmptyJadwal.visibility = View.GONE
+                courseAdapter.updateData(courses)
+            }
+        }
+
+        viewModel.pengumuman.observe(viewLifecycleOwner) { list ->
+            if (list.isNotEmpty()) {
+                binding.rvPengumumanPreview.visibility = View.VISIBLE
+                binding.tvEmptyPengumuman.visibility = View.GONE
+                val previewList = list.take(3)
+                pengumumanAdapter = PengumumanAdapter(previewList)
+                binding.rvPengumumanPreview.adapter = pengumumanAdapter
+            } else {
+                binding.rvPengumumanPreview.visibility = View.GONE
+                binding.tvEmptyPengumuman.visibility = View.VISIBLE
+            }
+        }
+
+        viewModel.unreadNotificationCount.observe(viewLifecycleOwner) { count ->
+            binding.viewNotificationBadge.visibility = if (count > 0) View.VISIBLE else View.GONE
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            // Optional: show/hide loading indicator
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
+            error?.let {
+                // Log error teknis untuk debugging — jangan tampilkan ke user
+                Log.e("DashboardFragment", "Firestore error: $it")
+                if (it.contains("FAILED_PRECONDITION") || it.contains("requires an index")) {
+                    Log.e("SIAKAD_INDEX", "=== PERLU DEPLOY FIRESTORE INDEX ===")
+                    Log.e("SIAKAD_INDEX", "Jalankan: firebase deploy --only firestore:indexes")
                 }
+                // User hanya melihat empty state yang ramah, bukan error teknis
+                viewModel.clearError()
             }
+        }
+    }
+
+    private fun loadDashboardData() {
+        val npm = sharedPref.npm
+        val semester = sharedPref.semester
+        if (npm.isNotEmpty()) {
+            viewModel.loadAllDashboardData(npm, semester)
+            viewModel.checkNotifications(
+                npm,
+                sharedPref.getLastSeenPengumuman(),
+                sharedPref.getLastSeenTagihan(),
+                sharedPref.getLastSeenPresensi()
+            )
         } else {
-            val username = arguments?.getString("USER_NAME")
-            if (!username.isNullOrEmpty()) {
-                binding.tvWelcome.text = "Selamat Datang, $username"
-            }
+            Log.e("DashboardFragment", "NPM kosong, tidak bisa memuat data")
         }
     }
 
-    private fun setupScheduleZoom() {
-        binding.cardZoomSchedule.setOnClickListener {
-            showZoomOptions()
-        }
-    }
-
-    private fun showZoomOptions() {
-        val popup = PopupMenu(requireContext(), binding.cardZoomSchedule)
-        popup.menu.add(0, 1, 0, "80% (Small)")
-        popup.menu.add(0, 2, 1, "100% (Normal)")
-        popup.menu.add(0, 3, 2, "120% (Large)")
-        popup.menu.add(0, 4, 3, "150% (Extra Large)")
-
-        popup.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                1 -> setScheduleZoom(80)
-                2 -> setScheduleZoom(100)
-                3 -> setScheduleZoom(120)
-                4 -> setScheduleZoom(150)
-            }
-            true
-        }
-
-        popup.show()
-    }
-
-    private fun setScheduleZoom(zoom: Int) {
-        currentScheduleZoom = zoom.coerceIn(minZoom, maxZoom)
-        binding.tvScheduleZoomLevel.text = "$currentScheduleZoom%"
-
-        val scale = currentScheduleZoom / 100f
-        binding.rvCourses.scaleX = scale
-        binding.rvCourses.scaleY = scale
-
-        binding.ivZoomSchedule.setImageResource(
-            when {
-                currentScheduleZoom <= 100 -> R.drawable.ic_zoom_in
-                currentScheduleZoom <= 120 -> R.drawable.ic_zoom_in
-                else -> R.drawable.ic_zoom_in
-            }
-        )
+    private fun refreshDashboardData() {
+        loadDashboardData()
     }
 
     private fun setupScanPresensiButton() {
@@ -205,59 +228,61 @@ class DashboardFragment : Fragment() {
         }
     }
 
-    private fun loadJadwalHariIni() {
-        val calendar = Calendar.getInstance()
-        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-
-        val hariIni = when (dayOfWeek) {
-            Calendar.MONDAY -> "Senin"
-            Calendar.TUESDAY -> "Selasa"
-            Calendar.WEDNESDAY -> "Rabu"
-            Calendar.THURSDAY -> "Kamis"
-            Calendar.FRIDAY -> "Jumat"
-            Calendar.SATURDAY -> "Sabtu"
-            Calendar.SUNDAY -> "Minggu"
-            else -> "Senin"
+    private fun setupPengumumanPreview() {
+        pengumumanAdapter = PengumumanAdapter(emptyList())
+        binding.rvPengumumanPreview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = pengumumanAdapter
         }
 
-        Log.d("JADWAL_DEBUG", "DashboardFragment: hariIni = '$hariIni', dayOfWeek = $dayOfWeek")
-
-        if (hariIni == "Sabtu" || hariIni == "Minggu") {
-            binding.rvCourses.visibility = View.GONE
-            binding.cardEmptyJadwal.visibility = View.VISIBLE
-            binding.tvEmptyJadwal.text = "Tidak ada jadwal kuliah hari ini"
-            binding.tvJadwalSubtitle.text = "0 mata kuliah"
-            return
+        binding.tvViewAllAnnouncements.setOnClickListener {
+            showNotificationBottomSheet()
         }
+    }
 
-        val npm = prefs.getString("NPM", "") ?: ""
-        val semester = prefs.getInt("CURRENT_SEMESTER", 1)
+    private fun setupNotificationIcon() {
+        binding.flNotificationIcon.setOnClickListener {
+            showNotificationBottomSheet()
+        }
+    }
 
-        firestoreManager.getCoursesByDay(hariIni, semester) { courses, error ->
-            activity?.runOnUiThread {
-                if (error != null) {
-                    Log.e("DashboardFragment", "Error loading jadwal: $error")
-                    binding.rvCourses.visibility = View.GONE
-                    binding.cardEmptyJadwal.visibility = View.VISIBLE
-                    binding.tvEmptyJadwal.text = "Gagal memuat jadwal"
-                    binding.tvJadwalSubtitle.text = "Error"
-                    return@runOnUiThread
+    private fun showNotificationBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val sheetBinding = com.widyatama.siakad.databinding.BottomSheetNotificationsBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(sheetBinding.root)
+
+        val notifications = viewModel.notifications.value ?: emptyList()
+        if (notifications.isEmpty()) {
+            sheetBinding.rvNotifications.visibility = View.GONE
+            sheetBinding.tvEmptyNotifications.visibility = View.VISIBLE
+        } else {
+            sheetBinding.rvNotifications.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                notificationAdapter = NotificationAdapter(notifications) { item ->
+                    // Handle notification click
+                    when (item.type) {
+                        com.widyatama.siakad.data.model.NotificationType.PENGUMUMAN -> {
+                            // Stay in bottom sheet or show detail
+                        }
+                        com.widyatama.siakad.data.model.NotificationType.TAGIHAN -> {
+                            // Navigate to tagihan tab
+                        }
+                        com.widyatama.siakad.data.model.NotificationType.PRESENSI -> {
+                            // Navigate to schedule
+                        }
+                    }
                 }
-
-                binding.tvJadwalSubtitle.text = "${courses.size} mata kuliah"
-                if (courses.isEmpty()) {
-                    binding.rvCourses.visibility = View.GONE
-                    binding.cardEmptyJadwal.visibility = View.VISIBLE
-                    binding.tvEmptyJadwal.text = "Tidak ada jadwal kuliah hari ini"
-                    binding.tvJadwalSubtitle.text = "0 mata kuliah"
-                } else {
-                    binding.rvCourses.visibility = View.VISIBLE
-                    binding.cardEmptyJadwal.visibility = View.GONE
-                    courseAdapter.updateData(courses)
-                    setScheduleZoom(currentScheduleZoom)
-                }
+                adapter = notificationAdapter
             }
+            sheetBinding.tvEmptyNotifications.visibility = View.GONE
         }
+
+        sheetBinding.tvMarkAllRead.setOnClickListener {
+            viewModel.markAllAsRead(sharedPref)
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.show()
     }
 
     private fun showProfilePopup(anchor: View) {
@@ -278,7 +303,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun logout() {
-        prefs.edit().clear().apply()
+        FirestoreManager.getInstance().signOut(requireContext())
 
         val intent = Intent(requireContext(), LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

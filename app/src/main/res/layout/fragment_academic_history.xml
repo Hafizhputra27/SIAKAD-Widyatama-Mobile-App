@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_default">
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Top App Bar -->
+        <!-- Purple Header -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/primary"
             app:elevation="0dp">
 
             <RelativeLayout
@@ -29,7 +29,7 @@
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_arrow_back"
-                    app:tint="@color/navy_blue" />
+                    app:tint="@color/surface" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -38,8 +38,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_toEndOf="@id/btnBack"
                     android:text="@string/title_riwayat_akademik"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                    android:textColor="@color/surface" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -54,17 +54,46 @@
                         android:layout_height="24dp"
                         android:layout_marginEnd="16dp"
                         android:src="@drawable/ic_settings"
-                        app:tint="@color/text_secondary" />
+                        app:tint="@color/surface" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/ic_person"
-                        app:civ_border_color="@color/blue_active"
+                        app:civ_border_color="@color/secondary"
                         app:civ_border_width="2dp" />
                 </LinearLayout>
             </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Tabs -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/surface"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/primary"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/primary"
+            app:tabTextColor="@color/text_secondary">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_uts" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_uas" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_transcript" />
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -77,128 +106,10 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Tabs -->
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    app:tabGravity="fill"
-                    app:tabIndicatorColor="@color/blue_light"
-                    app:tabIndicatorHeight="3dp"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/navy_blue"
-                    app:tabTextColor="@color/text_secondary">
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab_uts" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab_uas" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab_transcript" />
-                </com.google.android.material.tabs.TabLayout>
-
-                <!-- GPA & SKS Summary -->
+                <!-- Semester Filter -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        app:cardBackgroundColor="@color/blue_active"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="0dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="12dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/label_gpa"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tvGpaValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="3.88"
-                                android:textColor="@color/navy_blue"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        app:cardBackgroundColor="@color/blue_active"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="0dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="12dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/label_sks_cap"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tvSksValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="24"
-                                android:textColor="@color/navy_blue"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
-
-                <!-- Filter Section -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/label_semester"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -208,9 +119,10 @@
                         android:layout_height="48dp"
                         android:layout_marginEnd="12dp"
                         android:layout_weight="1"
-                        app:cardCornerRadius="4dp"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/divider"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="1dp"
+                        app:strokeColor="@color/text_hint"
                         app:strokeWidth="1dp">
 
                         <RelativeLayout
@@ -224,8 +136,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:text="Genap 2025/2026"
-                                android:textColor="@color/navy_blue"
-                                android:textSize="14sp" />
+                                android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                android:textColor="@color/text_primary" />
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -233,19 +145,16 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:src="@drawable/ic_expand_more"
-                                app:tint="@color/text_hint" />
+                                app:tint="@color/primary" />
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnReset"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        style="@style/Widget.MyApplication.Button.Outlined"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
-                        android:text="@string/btn_reset"
-                        android:textAllCaps="false"
-                        android:textColor="@color/blue_light"
-                        app:strokeColor="@color/blue_light" />
+                        android:text="@string/btn_reset" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -254,27 +163,23 @@
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnFilter"
+                        style="@style/Widget.MyApplication.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/navy_blue"
-                        android:text="@string/btn_filter"
-                        android:textAllCaps="false"
-                        app:cornerRadius="4dp" />
+                        android:text="@string/btn_filter" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSaveFilter"
+                        style="@style/Widget.MyApplication.Button.Outlined"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/text_secondary"
-                        android:text="@string/btn_save_filter"
-                        android:textAllCaps="false"
-                        app:cornerRadius="4dp" />
+                        android:text="@string/btn_save_filter" />
                 </LinearLayout>
 
                 <!-- Entries & Search -->
@@ -289,16 +194,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Show"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="@color/text_secondary" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="50dp"
                         android:layout_height="32dp"
                         android:layout_marginHorizontal="8dp"
-                        app:cardCornerRadius="4dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="8dp"
                         app:cardElevation="0dp"
-                        app:strokeColor="@color/divider"
+                        app:strokeColor="@color/text_hint"
                         app:strokeWidth="1dp">
 
                         <TextView
@@ -306,60 +212,41 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="10"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="12sp" />
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="@color/text_primary" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="entries"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="@color/text_secondary" />
                 </LinearLayout>
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MyApplication.TextInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/search_hint">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/search_hint"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
-
-                    <com.google.android.material.card.MaterialCardView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="8dp"
-                        app:cardCornerRadius="4dp"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/divider"
-                        app:strokeWidth="1dp">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@null"
-                            android:inputType="text"
-                            android:paddingHorizontal="8dp"
-                            android:textSize="12sp" />
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                        android:textColor="@color/text_primary" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Data Table -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="1dp"
-                    app:strokeColor="@color/divider"
-                    app:strokeWidth="1dp">
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -380,26 +267,26 @@
                                 <TableRow
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/light_gray">
+                                    android:background="@color/background">
 
                                     <TextView
                                         android:padding="12dp"
                                         android:text="@string/col_no"
-                                        android:textColor="@color/text_secondary"
-                                        android:textSize="10sp"
-                                        android:textStyle="bold" />
+                                        android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                        android:textColor="@color/text_primary" />
 
                                     <LinearLayout
                                         android:gravity="center_vertical"
                                         android:padding="12dp">
+
                                         <TextView
                                             android:text="@string/col_kelas"
-                                            android:textColor="@color/text_secondary"
-                                            android:textSize="10sp"
-                                            android:textStyle="bold" />
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
                                         <ImageView
-                                            android:layout_width="10dp"
-                                            android:layout_height="10dp"
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
                                             android:layout_marginStart="4dp"
                                             android:src="@drawable/ic_sort"
                                             app:tint="@color/text_hint" />
@@ -408,14 +295,15 @@
                                     <LinearLayout
                                         android:gravity="center_vertical"
                                         android:padding="12dp">
+
                                         <TextView
                                             android:text="@string/col_matakuliah"
-                                            android:textColor="@color/text_secondary"
-                                            android:textSize="10sp"
-                                            android:textStyle="bold" />
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
                                         <ImageView
-                                            android:layout_width="10dp"
-                                            android:layout_height="10dp"
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
                                             android:layout_marginStart="4dp"
                                             android:src="@drawable/ic_sort"
                                             app:tint="@color/text_hint" />
@@ -424,14 +312,15 @@
                                     <LinearLayout
                                         android:gravity="center_vertical"
                                         android:padding="12dp">
+
                                         <TextView
                                             android:text="@string/col_kredit"
-                                            android:textColor="@color/text_secondary"
-                                            android:textSize="10sp"
-                                            android:textStyle="bold" />
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
                                         <ImageView
-                                            android:layout_width="10dp"
-                                            android:layout_height="10dp"
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
                                             android:layout_marginStart="4dp"
                                             android:src="@drawable/ic_sort"
                                             app:tint="@color/text_hint" />
@@ -440,14 +329,15 @@
                                     <LinearLayout
                                         android:gravity="center_vertical"
                                         android:padding="12dp">
+
                                         <TextView
                                             android:text="@string/col_nilai"
-                                            android:textColor="@color/text_secondary"
-                                            android:textSize="10sp"
-                                            android:textStyle="bold" />
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                            android:textColor="@color/text_primary" />
+
                                         <ImageView
-                                            android:layout_width="10dp"
-                                            android:layout_height="10dp"
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
                                             android:layout_marginStart="4dp"
                                             android:src="@drawable/ic_sort"
                                             app:tint="@color/text_hint" />
@@ -456,48 +346,172 @@
 
                                 <!-- Data Rows -->
                                 <TableRow>
-                                    <TextView android:padding="16dp" android:text="1" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="B" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <LinearLayout android:padding="16dp" android:orientation="vertical">
-                                        <TextView android:text="ENG62110 - Statistika" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="1"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="B"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="ENG62110 - Statistika"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
                                     </LinearLayout>
-                                    <TextView android:padding="16dp" android:text="3" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="80.00" android:textSize="12sp" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="3"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="80.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
                                 </TableRow>
-                                <View android:layout_height="1dp" android:background="@color/divider" />
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
 
                                 <TableRow>
-                                    <TextView android:padding="16dp" android:text="2" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="B" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <LinearLayout android:padding="16dp" android:orientation="vertical">
-                                        <TextView android:text="SIF61114 - [e] e-Government" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="2"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="B"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="SIF61114 - [e] e-Government"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
                                     </LinearLayout>
-                                    <TextView android:padding="16dp" android:text="2" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="75.00" android:textSize="12sp" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="2"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="75.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
                                 </TableRow>
-                                <View android:layout_height="1dp" android:background="@color/divider" />
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
 
                                 <TableRow>
-                                    <TextView android:padding="16dp" android:text="3" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="A" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <LinearLayout android:padding="16dp" android:orientation="vertical">
-                                        <TextView android:text="SIF62115 - Sains Data" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="3"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="A"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="SIF62115 - Sains Data"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
                                     </LinearLayout>
-                                    <TextView android:padding="16dp" android:text="3" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="80.00" android:textSize="12sp" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="3"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="80.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
                                 </TableRow>
-                                <View android:layout_height="1dp" android:background="@color/divider" />
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
 
                                 <TableRow>
-                                    <TextView android:padding="16dp" android:text="4" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="A" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <LinearLayout android:padding="16dp" android:orientation="vertical">
-                                        <TextView android:text="SIF62116 - [e] Pengantar Kecerdasan Buatan" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="4"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="A"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:padding="16dp">
+
+                                        <TextView
+                                            android:text="SIF62116 - [e] Pengantar Kecerdasan Buatan"
+                                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                            android:textColor="@color/text_primary"
+                                            android:textStyle="bold" />
                                     </LinearLayout>
-                                    <TextView android:padding="16dp" android:text="2" android:textSize="12sp" android:textColor="@color/navy_blue" />
-                                    <TextView android:padding="16dp" android:text="84.00" android:textSize="12sp" android:textColor="@color/navy_blue" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="2"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
+
+                                    <TextView
+                                        android:padding="16dp"
+                                        android:text="84.00"
+                                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                        android:textColor="@color/text_primary" />
                                 </TableRow>
-                                <View android:layout_height="1dp" android:background="@color/divider" />
+
+                                <View
+                                    android:layout_height="1dp"
+                                    android:background="@color/background" />
 
                             </TableLayout>
                         </HorizontalScrollView>
@@ -506,7 +520,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/white"
+                            android:background="@color/surface"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
@@ -515,14 +529,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Showing 1 to 4 of 8 entries"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
+                                android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                                android:textColor="@color/text_secondary" />
 
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_marginTop="12dp"
-                                app:cardBackgroundColor="@color/navy_blue"
+                                app:cardBackgroundColor="@color/primary"
                                 app:cardCornerRadius="16dp"
                                 app:cardElevation="0dp">
 
@@ -531,14 +545,92 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:text="1"
-                                    android:textColor="@color/white"
-                                    android:textSize="12sp"
+                                    android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                                    android:textColor="@color/surface"
                                     android:textStyle="bold" />
                             </com.google.android.material.card.MaterialCardView>
                         </LinearLayout>
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <!-- Summary at bottom: SKS total, IPK semester -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/primary"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_gpa"
+                                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                                android:textColor="@color/surface" />
+
+                            <TextView
+                                android:id="@+id/tvGpaValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="3.88"
+                                android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                                android:textColor="@color/surface"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/secondary"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_sks_cap"
+                                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                                android:textColor="@color/surface" />
+
+                            <TextView
+                                android:id="@+id/tvSksValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="24"
+                                android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                                android:textColor="@color/surface"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -563,6 +655,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:visibility="gone"
+        app:cardBackgroundColor="@color/surface"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent">
@@ -578,14 +671,14 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="24dp"
-                android:background="@color/divider" />
+                android:background="@color/text_hint" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pilih Semester"
-                android:textColor="@color/navy_blue"
-                android:textSize="18sp"
+                android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                android:textColor="@color/text_primary"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -603,9 +696,13 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="12dp"
                     android:text="@string/sem_genap_24_25"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="16sp" />
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+                    android:textColor="@color/text_primary" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/background" />
             </LinearLayout>
 
             <LinearLayout
@@ -622,9 +719,13 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="12dp"
                     android:text="@string/sem_ganjil_25_26"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="16sp" />
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+                    android:textColor="@color/text_primary" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/background" />
             </LinearLayout>
 
             <LinearLayout
@@ -641,19 +742,17 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="12dp"
                     android:text="@string/sem_all"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="16sp" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+                    android:textColor="@color/text_primary" />
             </LinearLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCloseOverlay"
+                style="@style/Widget.MyApplication.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="@color/navy_blue"
-                android:text="Tutup"
-                android:textAllCaps="false"
-                app:cornerRadius="8dp" />
+                android:text="Tutup" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

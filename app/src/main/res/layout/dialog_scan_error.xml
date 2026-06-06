@@ -11,7 +11,7 @@
         android:layout_marginHorizontal="24dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/surface"
         app:strokeWidth="0dp">
 
         <LinearLayout
@@ -30,16 +30,16 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_close"
-                    app:tint="@color/text_secondary" />
+                    app:tint="@color/text_secondary"
+                    android:contentDescription="Close" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/scan_presensi"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.HeadlineMedium"
+                    android:textColor="@color/primary" />
             </RelativeLayout>
 
             <TextView
@@ -47,57 +47,59 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/masuk_kelas"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp" />
+                android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                android:textColor="@color/text_secondary" />
 
             <FrameLayout
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/bg_status_pending"
-                android:backgroundTint="@color/red_error">
+                android:background="@drawable/bg_status_circle"
+                android:backgroundTint="@color/error">
 
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_close"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    android:contentDescription="Error" />
             </FrameLayout>
 
             <TextView
+                android:id="@+id/tvErrorTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/error_title"
-                android:textColor="@color/red_error"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.MyApplication.HeadlineMedium"
+                android:textColor="@color/error" />
+
+            <TextView
+                android:id="@+id/tvErrorMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                android:textColor="@color/text_secondary"
+                android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRetry"
+                style="@style/Widget.MyApplication.Button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="32dp"
-                android:text="@string/btn_retry"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:backgroundTint="@color/navy_blue"
-                app:cornerRadius="12dp" />
+                android:text="@string/btn_retry" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnExit"
+                style="@style/Widget.MyApplication.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/btn_close"
-                android:textAllCaps="false"
-                android:textColor="@color/navy_blue"
-                android:textStyle="bold"
-                app:backgroundTint="@color/light_gray_accent"
-                app:cornerRadius="12dp"
-                app:strokeColor="@color/divider" />
+                android:text="@string/btn_close" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

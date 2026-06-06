@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FD">
+    android:background="@color/background">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/surface"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp"
@@ -27,18 +27,16 @@
                 android:paddingBottom="12dp">
 
                 <ImageView
-                    android:layout_width="140dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitStart"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/logo_widyatama" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
-
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -51,26 +49,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jadwal Kuliah"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Daftar Jadwal Kuliah"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                    android:textColor="@color/text_secondary" />
 
                 <!-- Semester Selector -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardSemesterSelector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/surface"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeColor="#E0E0E0"
+                    app:cardElevation="1dp"
+                    app:strokeColor="@color/divider"
                     app:strokeWidth="1dp">
 
                     <RelativeLayout
@@ -85,7 +87,7 @@
                             android:layout_height="20dp"
                             android:layout_centerVertical="true"
                             android:src="@drawable/ic_calendar"
-                            app:tint="@color/navy_blue" />
+                            app:tint="@color/primary" />
 
                         <TextView
                             android:id="@+id/tvCurrentSemester"
@@ -95,16 +97,16 @@
                             android:layout_marginStart="12dp"
                             android:layout_toEndOf="@id/icCalendar"
                             android:text="Genap 2024/2025"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="14sp" />
+                            android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                            android:textColor="@color/text_primary" />
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:rotation="90"
-                            app:tint="@color/navy_blue" />
+                            android:src="@drawable/ic_expand_more"
+                            app:tint="@color/text_hint" />
                     </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -115,71 +117,85 @@
                     android:layout_marginTop="16dp"
                     android:scrollbars="none">
 
-                    <LinearLayout
+                    <com.google.android.material.chip.ChipGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        app:chipSpacingHorizontal="8dp"
+                        app:singleLine="true"
+                        app:singleSelection="true">
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipMonday"
-                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Senin"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
                             android:textColor="@color/white"
-                            app:chipBackgroundColor="@color/navy_blue"
+                            app:chipBackgroundColor="@color/primary"
                             app:chipCornerRadius="20dp"
                             app:chipStrokeWidth="0dp" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipTuesday"
-                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:text="Selasa"
-                            android:textColor="@color/navy_blue"
-                            app:chipBackgroundColor="#F0F2F8"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                            android:textColor="@color/text_secondary"
+                            app:chipBackgroundColor="@color/light_gray"
                             app:chipCornerRadius="20dp"
                             app:chipStrokeWidth="0dp" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipWednesday"
-                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:text="Rabu"
-                            android:textColor="@color/navy_blue"
-                            app:chipBackgroundColor="#F0F2F8"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                            android:textColor="@color/text_secondary"
+                            app:chipBackgroundColor="@color/light_gray"
                             app:chipCornerRadius="20dp"
                             app:chipStrokeWidth="0dp" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipThursday"
-                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:text="Kamis"
-                            android:textColor="@color/navy_blue"
-                            app:chipBackgroundColor="#F0F2F8"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                            android:textColor="@color/text_secondary"
+                            app:chipBackgroundColor="@color/light_gray"
                             app:chipCornerRadius="20dp"
                             app:chipStrokeWidth="0dp" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipFriday"
-                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:text="Jumat"
-                            android:textColor="@color/navy_blue"
-                            app:chipBackgroundColor="#F0F2F8"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                            android:textColor="@color/text_secondary"
+                            app:chipBackgroundColor="@color/light_gray"
                             app:chipCornerRadius="20dp"
                             app:chipStrokeWidth="0dp" />
 
-                    </LinearLayout>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipSaturday"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sabtu"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                            android:textColor="@color/text_secondary"
+                            app:chipBackgroundColor="@color/light_gray"
+                            app:chipCornerRadius="20dp"
+                            app:chipStrokeWidth="0dp" />
+                    </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
 
                 <!-- Course List -->
@@ -190,15 +206,51 @@
                     android:layout_marginTop="16dp"
                     android:nestedScrollingEnabled="false" />
 
+                <!-- Empty State -->
+                <LinearLayout
+                    android:id="@+id/layoutEmptyState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="40dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="@color/text_hint" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:text="Tidak ada jadwal hari ini"
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Nikmati waktu luangmu atau cek hari lain!"
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+
                 <!-- Summary Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="@color/navy_blue"
+                    app:cardBackgroundColor="@color/primary"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="2dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -214,8 +266,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Total Daily Credits"
-                                android:textColor="#C5CAE9"
-                                android:textSize="12sp" />
+                                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                                android:textColor="#C5CAE9" />
 
                             <TextView
                                 android:id="@+id/tvTotalCredits"
@@ -223,15 +275,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="6 SKS"
-                                android:textColor="@color/white"
-                                android:textSize="28sp"
+                                android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                                android:textColor="@color/secondary"
                                 android:textStyle="bold" />
 
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
-                                app:cardBackgroundColor="#283593"
+                                app:cardBackgroundColor="#1E124F"
                                 app:cardCornerRadius="12dp"
                                 app:cardElevation="0dp">
 
@@ -247,7 +299,7 @@
                                         android:layout_width="16dp"
                                         android:layout_height="16dp"
                                         android:src="@drawable/ic_trending_up"
-                                        app:tint="#4FC3F7" />
+                                        app:tint="@color/secondary" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -260,21 +312,19 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Next: Pemrograman Mobile"
-                                            android:textColor="@color/white"
-                                            android:textSize="11sp" />
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                                            android:textColor="@color/white" />
 
                                         <TextView
                                             android:id="@+id/tvNextCourseTime"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="08:00 AM"
-                                            android:textColor="#4FC3F7"
-                                            android:textSize="10sp" />
+                                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                                            android:textColor="@color/secondary" />
                                     </LinearLayout>
-
                                 </LinearLayout>
                             </com.google.android.material.card.MaterialCardView>
-
                         </LinearLayout>
 
                         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -283,15 +333,12 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:src="@android:drawable/ic_input_add"
-                            app:backgroundTint="#E65100"
+                            app:backgroundTint="@color/secondary"
                             app:elevation="0dp"
                             app:fabSize="mini"
                             app:tint="@color/white" />
-
                     </RelativeLayout>
-
                 </com.google.android.material.card.MaterialCardView>
-
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

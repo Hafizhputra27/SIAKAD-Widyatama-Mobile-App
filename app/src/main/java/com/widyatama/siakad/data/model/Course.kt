@@ -10,10 +10,15 @@ data class Course(
     val roomId: String = "",
     val hari: String = "",
     val jamMulai: String = "",
+    val jamSelesai: String = "",
     val room: String = "",
     val lecturer: String = "",
     val enrolledCount: Int = 0,
     val attendance: Int = 0,
     val totalAttendance: Int = 0,
     val isActive: Boolean = true
-)
+) {
+    /** Display time range (e.g. "08:00 - 10:00") */
+    val jamDisplay: String
+        get() = if (jamSelesai.isNotEmpty()) "$jamMulai - $jamSelesai" else jamMulai
+}

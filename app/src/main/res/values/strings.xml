@@ -27,12 +27,30 @@
     <string name="announcement_2_time">5 jam yang lalu</string>
     <string name="announcement_3_title">Pembayaran UKT Tahap 2</string>
     <string name="announcement_3_time">1 hari yang lalu</string>
+    <string name="announcement_empty">Tidak ada pengumuman</string>
     
+    <!-- QR Scanner Strings -->
+    <string name="qr_scan_title">Scan QR Presensi</string>
+    <string name="qr_instruction">Arahkan kamera ke QR Code</string>
+    <string name="qr_sub_instruction">Pastikan QR terlihat jelas di dalam bingkai</string>
+    <string name="qr_verifying">Memverifikasi kehadiran…</string>
+    <string name="qr_success_title">Absensi Berhasil!</string>
+    <string name="qr_duplicate_title">Sudah Tercatat</string>
+    <string name="qr_invalid_title">QR Tidak Valid</string>
+    <string name="qr_expired_title">QR Kedaluwarsa</string>
+    <string name="qr_inactive_title">QR Tidak Aktif</string>
+    <string name="qr_not_enrolled_title">Tidak Terdaftar</string>
+    <string name="qr_error_network">Gagal Verifikasi</string>
+    <string name="btn_scan_again">Scan Lagi</string>
+    <string name="btn_back_to_dashboard">Kembali ke Dashboard</string>
+
     <string name="nav_dashboard">Dashboard</string>
     <string name="nav_admin">Admin</string>
     <string name="nav_schedule">Jadwal</string>
     <string name="nav_results">Nilai</string>
     <string name="nav_courses">Mata Kuliah</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_settings">Pengaturan</string>
     
     <string name="login_error">Please enter Student ID and Password</string>
     <string name="login_failed">Invalid credentials. Please try again.</string>
@@ -93,21 +111,6 @@
     <string name="menu_pusat_bantuan">Pusat Bantuan</string>
     <string name="menu_tentang">Tentang Aplikasi</string>
     <string name="btn_keluar">Keluar</string>
-<<<<<<< HEAD
-    <string name="login_error">Please enter Student ID and Password</string>
-    <string name="login_success">Login Successful</string>
-    <string name="empty_field_error">Please fill in all fields</string>
-    <string name="password_mismatch_error">Passwords do not match</string>
-    <string name="registration_success">Registration Successful</string>
-    <string name="register_button">Register</string>
-    <string name="register_title">Create Account</string>
-    <string name="username_hint">Username</string>
-    <string name="confirm_password_hint">Confirm Password</string>
-    <string name="go_to_login">Already have an account? Log In</string>
-    <string name="name_hint">Full Name</string>
-    <string name="npm_hint">Student ID / NPM</string>
-    <string name="major_hint">Major</string>
-    <string name="campus_email_hint">Campus Email</string>
 
     <!-- Scan QR Dialog Strings -->
     <string name="masuk_kelas">Masuk Kelas</string>
@@ -155,13 +158,8 @@
     <string name="sem_genap_24_25">Genap 2024/2025</string>
     <string name="sem_ganjil_25_26">Ganjil 2025/2026</string>
     <string name="sem_all">Semua Semester</string>
-=======
-    <string name="nav_profile">Profil</string>
-
-    <string name="nav_settings">Pengaturan</string>
 
     <string name="mata_kuliah">Mata Kuliah</string>
     <string name="nilai_akhir">Nilai Akhir</string>
     <string name="status_lulus">Status Lulus</string>
->>>>>>> f3aa7b186584d76fe2b7bd4a0fe384862cfc8973
 </resources>

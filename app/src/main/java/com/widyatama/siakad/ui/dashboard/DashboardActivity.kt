@@ -15,6 +15,15 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Apply dark mode preference before setting content view
+        val sharedPref = com.widyatama.siakad.data.local.SharedPrefManager.getInstance(this)
+        val isDark = sharedPref.getDarkMode()
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+            if (isDark) androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+            else androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+        )
+
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -55,6 +64,10 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.fade_in, R.anim.fade_out,
+                R.anim.fade_in, R.anim.fade_out
+            )
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }

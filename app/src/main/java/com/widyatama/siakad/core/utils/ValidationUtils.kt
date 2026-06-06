@@ -6,7 +6,7 @@ import android.util.Base64
 
 object ValidationUtils {
     fun isValidCampusEmail(email: String): Boolean {
-        return email.endsWith("@widyatama.ac.id")
+        return email.endsWith("@student.widyatama.ac.id") || email.endsWith("@widyatama.ac.id")
     }
 
     fun isNotEmpty(vararg values: String): Boolean {

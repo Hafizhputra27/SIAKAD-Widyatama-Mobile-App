@@ -5,9 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     android:layout_marginHorizontal="2dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
-    app:cardBackgroundColor="@color/white">
+    app:cardBackgroundColor="@color/surface"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,9 +18,22 @@
             android:id="@+id/indicatorBar"
             android:layout_width="4dp"
             android:layout_height="0dp"
-            android:background="@color/navy_blue"
+            android:background="@color/secondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCourseCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:text="IF-101"
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+            android:textColor="@color/primary"
+            app:layout_constraintEnd_toStartOf="@id/tvCourseType"
+            app:layout_constraintStart_toEndOf="@id/indicatorBar"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -32,12 +45,12 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="Pemrograman Mobile"
-            android:textColor="@color/navy_blue"
-            android:textSize="16sp"
+            android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+            android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/tvCourseType"
             app:layout_constraintStart_toEndOf="@id/indicatorBar"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tvCourseCode" />
 
         <TextView
             android:id="@+id/tvCourseType"
@@ -47,8 +60,8 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="4dp"
             android:text="WAJIB"
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
             android:textColor="@color/white"
-            android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +73,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/ic_calendar"
-            app:tint="@color/blue_light"
+            app:tint="@color/primary"
             app:layout_constraintStart_toEndOf="@id/indicatorBar"
             app:layout_constraintTop_toBottomOf="@id/tvCourseName" />
 
@@ -72,8 +85,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="09:45 - 12:45 WIB"
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/ivTimeIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivTimeIcon"
@@ -85,7 +98,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="6dp"
             android:src="@drawable/ic_location"
-            app:tint="@color/orange_accent"
+            app:tint="@color/secondary"
             app:layout_constraintStart_toStartOf="@id/ivTimeIcon"
             app:layout_constraintTop_toBottomOf="@id/ivTimeIcon" />
 
@@ -97,8 +110,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Ruangan B409 (Gedung B)"
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/ivRoomIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivRoomIcon"
@@ -122,8 +135,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Dr. Ahmad Sutrisno, M.T."
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/ivLecturerIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivLecturerIcon"
@@ -140,22 +153,64 @@
             app:layout_constraintStart_toEndOf="@id/indicatorBar"
             app:layout_constraintTop_toBottomOf="@id/ivLecturerIcon" />
 
+        <ProgressBar
+            android:id="@+id/progressKehadiran"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_kehadiran"
+            app:layout_constraintEnd_toStartOf="@id/tvPersentaseKehadiran"
+            app:layout_constraintStart_toEndOf="@id/indicatorBar"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <TextView
+            android:id="@+id/tvPersentaseKehadiran"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:minWidth="36dp"
+            android:text="0%"
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/progressKehadiran"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/progressKehadiran" />
+
+        <TextView
+            android:id="@+id/tvDetailKehadiran"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="0 dari 14 pertemuan"
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+            android:textColor="@color/text_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/indicatorBar"
+            app:layout_constraintTop_toBottomOf="@id/progressKehadiran" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/indicatorBar"
-            app:layout_constraintTop_toBottomOf="@id/divider">
+            app:layout_constraintTop_toBottomOf="@id/tvDetailKehadiran">
 
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_check_circle"
-                app:tint="@color/green_success" />
+                app:tint="@color/success" />
 
             <TextView
                 android:id="@+id/tvAttendanceCount"
@@ -163,8 +218,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="8/16"
-                android:textColor="@color/green_success"
-                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                android:textColor="@color/success"
                 android:textStyle="bold" />
 
             <TextView
@@ -173,8 +228,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="Hadir"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                android:textColor="@color/text_secondary" />
         </LinearLayout>
 
         <TextView
@@ -183,8 +238,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Detail →"
-            android:textColor="@color/blue_light"
-            android:textSize="12sp"
+            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+            android:textColor="@color/primary"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
