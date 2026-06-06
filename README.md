@@ -1,1 +1,0 @@
-# SIAKAD-Widyatama-Mobile-App

@@ -17,11 +17,19 @@ object AppConstants {
     const val COL_ROOMS = "rooms"
     const val COL_PRESENSI = "presensi"
     const val COL_PENGUMUMAN = "pengumuman"
+    const val COL_PERTEMUAN = "pertemuan"
 
     // Sub-collections
     const val SUBCOL_ACADEMIC_RESULTS = "academic_results"
     const val SUBCOL_PAYMENTS = "payments"
     const val SUBCOL_TAGIHAN = "tagihan"
-    const val SUBCOL_TRANSKRIP = "transkrip"
     const val SUBCOL_PENGATURAN = "pengaturan"
+
+    // API Base URL
+    val BASE_API_URL: String
+        get() = if (com.widyatama.siakad.BuildConfig.DEBUG) {
+            "http://10.0.2.2:3000/api/"
+        } else {
+            "https://siakad-widyatama.vercel.app/api/"
+        }
 }

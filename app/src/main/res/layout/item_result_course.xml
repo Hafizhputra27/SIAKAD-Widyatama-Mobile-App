@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/surface"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
     app:strokeColor="@color/divider"
     app:strokeWidth="1dp">
 
@@ -18,13 +20,13 @@
             android:id="@+id/ivCourseIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/light_gray"
+            android:background="@color/surface_variant"
             android:padding="8dp"
             android:src="@drawable/ic_calendar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/navy_blue" />
+            app:tint="@color/primary" />
 
         <TextView
             android:id="@+id/tvCourseName"
@@ -32,13 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:text="Pendidikan Kewarganegaraan"
-            android:textColor="@color/navy_blue"
-            android:textSize="14sp"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.MyApplication.BodyLarge"
+            android:textColor="@color/text_primary"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvGrade"
+            app:layout_constraintEnd_toStartOf="@+id/cvGradeBadge"
             app:layout_constraintStart_toEndOf="@id/ivCourseIcon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pendidikan Kewarganegaraan" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -52,9 +55,10 @@
                 android:id="@+id/tvSks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2 SKS"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
                 android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                tools:text="2 SKS" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,22 +72,35 @@
                 android:id="@+id/tvMutu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mutu: 8"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
                 android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                tools:text="Mutu: 8" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvGrade"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvGradeBadge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A"
-            android:textColor="@color/green_success"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            app:cardBackgroundColor="@color/surface_variant"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvGrade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                android:textColor="@color/success"
+                android:textStyle="bold"
+                tools:text="A" />
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

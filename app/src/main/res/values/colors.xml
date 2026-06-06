@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="navy_blue">#1A1A5E</color>
-    <color name="navy_blue_dark">#0F0F3D</color>
+    <!-- Widyatama Brand Colors -->
+    <color name="primary">#291769</color>
+    <color name="primary_dark">#1A0F45</color>
+    <color name="primary_light">#3D2B8C</color>
+    <color name="secondary">#E3781A</color>
+    <color name="secondary_variant">#C25D0A</color>
+    <color name="secondary_light">#F5A623</color>
+
+    <!-- Semantic Colors -->
+    <color name="success">#16A34A</color>
+    <color name="error">#DC2626</color>
+    <color name="warning">#F59E0B</color>
+    <color name="info">#3B82F6</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#F8F9FC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F1F5F9</color>
+    <color name="card_background">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1F2937</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_hint">#9CA3AF</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_secondary">#FFFFFF</color>
+
+    <!-- Utility Colors -->
+    <color name="divider">#E5E7EB</color>
+    <color name="overlay">#801A0F45</color>
+    <color name="overlay_light">#80FFFFFF</color>
+    <color name="ripple">#1A291769</color>
+
+    <!-- Legacy aliases (for backward compatibility during migration) -->
+    <color name="navy_blue">@color/primary</color>
+    <color name="navy_blue_dark">@color/primary_dark</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#F5F7FA</color>
     <color name="light_gray_accent">#E8ECF0</color>
-    <color name="orange_accent">#FF8C00</color>
-    <color name="green_success">#22C55E</color>
-    <color name="blue_light">#3B82F6</color>
+    <color name="orange_accent">@color/secondary</color>
+    <color name="green_success">@color/success</color>
+    <color name="red_error">@color/error</color>
+    <color name="blue_light">@color/info</color>
     <color name="blue_active">#EBF5FF</color>
-    <color name="text_hint">#9CA3AF</color>
-    <color name="text_secondary">#6B7280</color>
-    <color name="divider">#E5E7EB</color>
-    <color name="overlay_dark">#80000000</color>
-    <color name="white_overlay">#80FFFFFF</color>
-    <color name="card_background">#FFFFFFFF</color>
-    <color name="background_default">#F5F7FA</color>
+    <color name="overlay_dark">@color/overlay</color>
+    <color name="white_overlay">@color/overlay_light</color>
+    <color name="background_default">@color/background</color>
 </resources>

@@ -15,3 +15,5 @@ class ExampleUnitTest {
         assertEquals(4, 2 + 2)
     }
 }
+// ExampleUnitTest moved to /removed/ExampleUnitTest.kt
+// This file cleared during automated cleanup. Restore from removed/ if needed.

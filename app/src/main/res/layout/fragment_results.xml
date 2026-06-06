@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_default">
+    android:background="@color/background">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -23,11 +23,11 @@
                 android:layout_marginBottom="20dp">
 
                 <ImageView
-                    android:layout_width="140dp"
-                    android:layout_height="40dp"
-                    android:scaleType="fitStart"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/logo_widyatama" />
-
             </RelativeLayout>
 
             <!-- Cumulative GPA Card -->
@@ -35,13 +35,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp">
+                app:cardBackgroundColor="@color/primary"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/navy_blue"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -49,8 +49,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CUMULATIVE GPA"
-                        android:textColor="@color/white_overlay"
-                        android:textSize="12sp"
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="#C5CAE9"
                         android:textStyle="bold" />
 
                     <RelativeLayout
@@ -62,17 +62,18 @@
                             android:id="@+id/tvCgpa"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3.85"
-                            android:textColor="@color/white"
-                            android:textSize="36sp"
-                            android:textStyle="bold" />
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                            android:textColor="@color/secondary"
+                            android:textStyle="bold"
+                            tools:text="3.85" />
 
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            app:cardBackgroundColor="@color/navy_blue"
+                            app:cardBackgroundColor="#1E124F"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="0dp">
 
@@ -90,18 +91,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="Total Credits"
-                        android:textColor="@color/white_overlay"
-                        android:textSize="12sp" />
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="#C5CAE9" />
 
                     <TextView
                         android:id="@+id/tvTotalCredits"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="114 / 144"
+                        android:text=""
+                        android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
+                        android:textStyle="bold"
+                        tools:text="114 / 144" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -117,8 +118,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp">
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -130,8 +132,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SEM. SKS"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
                             android:textColor="@color/text_secondary"
-                            android:textSize="10sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -139,10 +141,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="22"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            tools:text="22" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -151,8 +154,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp">
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -164,8 +168,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SEM. GPA"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
                             android:textColor="@color/text_secondary"
-                            android:textSize="10sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -173,10 +177,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="3.92"
-                            android:textColor="@color/orange_accent"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                            android:textColor="@color/secondary"
+                            android:textStyle="bold"
+                            tools:text="3.92" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
@@ -191,21 +196,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Academic Period"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                    android:textColor="@color/text_primary" />
 
                 <TextView
+                    android:id="@+id/tvStatusBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:background="@drawable/bg_status_proses"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
-                    android:text="Active"
-                    android:textColor="#22C55E"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                    android:textColor="@color/success"
+                    android:textStyle="bold"
+                    tools:text="AKTIF" />
             </RelativeLayout>
 
             <HorizontalScrollView
@@ -221,29 +227,6 @@
                     app:singleLine="true"
                     app:singleSelection="true">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSem6"
-                        style="@style/Widget.MaterialComponents.Chip.Choice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Semester 6"
-                        app:chipBackgroundColor="@color/navy_blue"
-                        android:textColor="@color/white" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSem5"
-                        style="@style/Widget.MaterialComponents.Chip.Choice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Semester 5" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSem4"
-                        style="@style/Widget.MaterialComponents.Chip.Choice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Semester 4" />
-
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
@@ -257,31 +240,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Course Breakdown"
-                    android:textColor="@color/navy_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/ic_settings"
-                        app:tint="@color/text_secondary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:text="Sort"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                    android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                    android:textColor="@color/text_primary" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -292,14 +252,41 @@
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_result_course" />
 
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="40dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_results"
+                    app:tint="@color/text_hint" />
+
+                <TextView
+                    android:id="@+id/tvEmptyMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="Belum ada data nilai"
+                    android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
+
             <!-- Semester Progress Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="100dp"
-                app:cardBackgroundColor="@color/blue_active"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp">
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -311,9 +298,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Semester Progress"
-                        android:textColor="@color/navy_blue"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
+                        android:textColor="@color/text_primary" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -324,29 +310,33 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Target Achievement"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="12sp"
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="@color/text_primary"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvProgressPercentage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="94%"
-                            android:textColor="@color/navy_blue"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            tools:text="94%" />
                     </RelativeLayout>
 
                     <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressSemester"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:progress="94"
-                        app:indicatorColor="@color/green_success"
-                        app:trackColor="@color/white"
+                        android:progress="0"
+                        app:indicatorColor="@color/primary"
+                        app:trackColor="@color/divider"
                         app:trackCornerRadius="4dp"
-                        app:trackThickness="8dp" />
+                        app:trackThickness="8dp"
+                        tools:progress="94" />
 
                     <View
                         android:layout_width="match_parent"
@@ -355,13 +345,15 @@
                         android:background="@color/divider" />
 
                     <TextView
+                        android:id="@+id/tvMotivasi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:lineSpacingExtra="4dp"
-                        android:text="Great work! Your current GPA exceeds the department average of 3.42. Keep maintaining this performance for scholarship eligibility next semester."
+                        android:text=""
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
                         android:textColor="@color/text_secondary"
-                        android:textSize="13sp" />
+                        tools:text="Great work! Your current GPA exceeds the department average of 3.42. Keep maintaining this performance for scholarship eligibility next semester." />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

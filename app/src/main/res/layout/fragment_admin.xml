@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FD"
+    android:background="@color/background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -15,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/surface"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
@@ -23,9 +24,10 @@
             android:paddingBottom="12dp">
 
             <ImageView
-                android:layout_width="140dp"
-                android:layout_height="40dp"
-                android:scaleType="fitStart"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/logo_widyatama" />
 
             <View
@@ -39,7 +41,7 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/surface"
             android:paddingBottom="16dp"
             android:scrollbars="none">
 
@@ -55,8 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tagihan Aktif"
+                    android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
                     android:textColor="@color/white"
-                    app:chipBackgroundColor="@color/navy_blue"
+                    app:chipBackgroundColor="@color/primary"
                     app:chipCornerRadius="20dp"
                     app:chipStrokeWidth="0dp" />
 
@@ -66,9 +69,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="History Pembayaran"
-                    android:textColor="@color/navy_blue"
-                    app:chipBackgroundColor="#F0F2F8"
+                    android:text="History"
+                    android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                    android:textColor="@color/primary"
+                    app:chipBackgroundColor="#F3F4F6"
                     app:chipCornerRadius="20dp"
                     app:chipStrokeWidth="0dp" />
 
@@ -97,36 +101,33 @@
                         android:id="@+id/tvMainTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="History USP"
-                        android:textColor="@color/navy_blue"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:text=""
+                        android:textAppearance="@style/TextAppearance.MyApplication.TitleLarge"
+                        android:textColor="@color/text_primary"
+                        tools:text="History USP" />
 
                     <TextView
                         android:id="@+id/tvMainSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Riwayat transaksi biaya\npendidikan mahasiswa"
+                        android:text=""
+                        android:textAppearance="@style/TextAppearance.MyApplication.BodyMedium"
                         android:textColor="@color/text_secondary"
-                        android:textSize="14sp" />
+                        tools:text="Riwayat transaksi biaya\npendidikan mahasiswa" />
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDownload"
+                    style="@style/Widget.MyApplication.Button.Outlined"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Download"
+                    android:text="Download PDF"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    app:backgroundTint="#A35216"
-                    app:cornerRadius="12dp"
+                    android:textColor="@color/primary"
                     app:icon="@drawable/ic_download"
-                    app:iconPadding="8dp"
-                    app:iconSize="16dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/primary" />
 
             </RelativeLayout>
 
@@ -136,9 +137,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@color/navy_blue"
+                app:cardBackgroundColor="@color/primary"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -151,19 +152,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total Kewajiban USP"
-                        android:textColor="#C5CAE9"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/tvSummaryAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Rp 14.500.000"
+                        android:text=""
+                        android:textAppearance="@style/TextAppearance.MyApplication.HeadlineLarge"
                         android:textColor="@color/white"
-                        android:textSize="28sp"
-                        android:textStyle="bold" />
+                        tools:text="Rp 14.500.000" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -175,18 +175,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Progres Pembayaran"
-                            android:textColor="@color/white"
-                            android:textSize="11sp" />
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/tvProgressValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="100%"
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelMedium"
                             android:textColor="@color/white"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="100%" />
                     </RelativeLayout>
 
                     <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -194,11 +195,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:progress="100"
-                        app:indicatorColor="#4FC3F7"
-                        app:trackColor="#283593"
+                        android:progress="0"
+                        app:indicatorColor="@color/secondary"
+                        app:trackColor="#1A0F47"
                         app:trackCornerRadius="4dp"
-                        app:trackThickness="8dp" />
+                        app:trackThickness="8dp"
+                        tools:progress="100" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -211,17 +213,17 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ic_person"
-                            app:tint="#4FC3F7" />
+                            app:tint="@color/secondary" />
 
                         <TextView
                             android:id="@+id/tvStatusFooter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="Status: LUNAS"
-                            android:textColor="#4FC3F7"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.MyApplication.LabelLarge"
+                            android:textColor="@color/secondary"
+                            tools:text="Status: LUNAS" />
 
                     </LinearLayout>
 
