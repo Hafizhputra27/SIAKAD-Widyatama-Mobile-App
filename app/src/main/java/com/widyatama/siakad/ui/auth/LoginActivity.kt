@@ -194,22 +194,8 @@ class LoginActivity : AppCompatActivity() {
                         return
                     }
 
-                    // Optionally attempt to auto-sync to Firebase Auth (best-effort)
-                    try {
-                        val auth = FirebaseAuth.getInstance()
-                        val email = "${npm}@student.widyatama.ac.id"
-                        val currentUser = auth.currentUser
-                        if (currentUser != null && !currentUser.isAnonymous && currentUser.email == email) {
-                            currentUser.updatePassword(password)
-                        } else {
-                            auth.createUserWithEmailAndPassword(email, password)
-                        }
-                    } catch (e: Exception) {
-                        Log.w(TAG, "API fallback: auto-sync exception: ${e.message}")
-                    }
-
-                    // Simpan session & lanjut
-                    saveSessionAndNavigate(student)
+                    // Wajib Firebase Auth sebelum simpan session & navigate
+                    ensureFirebaseAuthThenProceed(npm, password)
                 } else {
                     Log.e(TAG, "API fallback failed: HTTP ${response.code()} | message=${response.message()}")
                     Toast.makeText(this@LoginActivity, "Gagal mengambil data dari server. Hubungi admin.", Toast.LENGTH_LONG).show()
@@ -225,6 +211,52 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+
+    /**
+     * Setelah validasi via API, sinkronkan Firebase Auth lalu lanjut fetch Firestore.
+     * Urutan: signIn → (createUser jika belum ada) → signIn lagi → fetchMahasiswaData
+     */
+    private fun ensureFirebaseAuthThenProceed(npm: String, password: String) {
+        val email = "${npm}@student.widyatama.ac.id"
+        val auth = FirebaseAuth.getInstance()
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                Log.d(TAG, "API fallback: Firebase sign-in SUCCESS")
+                resetLoginState()
+                fetchMahasiswaData(npm)
+            }
+            .addOnFailureListener { signInError ->
+                Log.w(TAG, "API fallback: sign-in failed (${signInError.message}), trying createUser...")
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnSuccessListener {
+                        Log.d(TAG, "API fallback: Firebase createUser SUCCESS, signing in...")
+                        auth.signInWithEmailAndPassword(email, password)
+                            .addOnSuccessListener {
+                                resetLoginState()
+                                fetchMahasiswaData(npm)
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e(TAG, "API fallback: sign-in after create failed: ${e.message}")
+                                Toast.makeText(
+                                    this,
+                                    "Gagal login Firebase. Hubungi admin.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                resetLoginState()
+                            }
+                    }
+                    .addOnFailureListener { createError ->
+                        Log.e(TAG, "API fallback: createUser failed: ${createError.message}")
+                        Toast.makeText(
+                            this,
+                            "Gagal aktivasi akun Firebase. Hubungi admin.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        resetLoginState()
+                    }
+            }
+    }
 
     private fun fetchMahasiswaData(npm: String) {
         Log.d(TAG, "Fetching mahasiswa data from Firestore for npm='$npm'")

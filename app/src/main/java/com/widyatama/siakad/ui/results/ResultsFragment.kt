@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.widyatama.siakad.R
-import com.widyatama.siakad.adapter.ResultAdapter
+import com.widyatama.siakad.adapter.SemesterResultAdapter
 import com.widyatama.siakad.core.utils.NetworkUtils
 import com.widyatama.siakad.data.local.SharedPrefManager
 import com.widyatama.siakad.data.model.AcademicResult
@@ -27,6 +27,7 @@ class ResultsFragment : Fragment() {
     private val sharedPref by lazy { SharedPrefManager.getInstance(requireContext()) }
 
     private var allResultsBySemester: Map<Int, List<AcademicResult>> = emptyMap()
+    private var semesterResultAdapter: SemesterResultAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +49,7 @@ class ResultsFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.rvResultCourses.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = ResultAdapter(emptyList())
+            adapter = SemesterResultAdapter(emptyList())
             isNestedScrollingEnabled = false
         }
     }
@@ -67,10 +68,14 @@ class ResultsFragment : Fragment() {
                 return@observe
             }
 
-            setupSemesterChips(bySemester)
+            binding.layoutEmptyState.visibility = View.GONE
+            binding.rvResultCourses.visibility = View.VISIBLE
+            binding.chipGroupSemester.visibility = View.VISIBLE
 
-            val latestSemester = bySemester.keys.first()
-            showResultsForSemester(bySemester[latestSemester] ?: emptyList())
+            setupSemesterChips(bySemester)
+            showAllSemestersGrouped(bySemester)
+
+            val latestSemester = bySemester.keys.maxOrNull() ?: return@observe
             updateSemesterStats(bySemester[latestSemester] ?: emptyList())
         }
 
@@ -78,6 +83,7 @@ class ResultsFragment : Fragment() {
             error?.let {
                 showLoading(false)
                 showEmptyState(it)
+                Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG).show()
                 viewModel.clearError()
             }
         }
@@ -143,35 +149,62 @@ class ResultsFragment : Fragment() {
     private fun setupSemesterChips(bySemester: Map<Int, List<AcademicResult>>) {
         binding.chipGroupSemester.removeAllViews()
 
-        bySemester.keys.forEachIndexed { index, semester ->
+        val allChip = Chip(requireContext()).apply {
+            text = "Semua"
+            isCheckable = true
+            isChecked = true
+            styleChip(this, true)
+            setOnClickListener {
+                selectChip(this)
+                showAllSemestersGrouped(bySemester)
+            }
+        }
+        binding.chipGroupSemester.addView(allChip)
+
+        bySemester.keys.sortedDescending().forEach { semester ->
             val chip = Chip(requireContext()).apply {
                 text = "Semester $semester"
                 isCheckable = true
-                isChecked = (index == 0)
-
-                if (isChecked) {
-                    setChipBackgroundColorResource(R.color.navy_blue)
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                } else {
-                    setChipBackgroundColorResource(R.color.light_gray)
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
-                }
-
+                isChecked = false
+                styleChip(this, false)
                 setOnClickListener {
-                    for (i in 0 until binding.chipGroupSemester.childCount) {
-                        val child = binding.chipGroupSemester.getChildAt(i) as Chip
-                        child.setChipBackgroundColorResource(R.color.light_gray)
-                        child.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
-                    }
-                    setChipBackgroundColorResource(R.color.navy_blue)
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-
-                    showResultsForSemester(bySemester[semester] ?: emptyList())
+                    selectChip(this)
+                    showSingleSemester(semester, bySemester[semester] ?: emptyList())
                     updateSemesterStats(bySemester[semester] ?: emptyList())
                 }
             }
             binding.chipGroupSemester.addView(chip)
         }
+    }
+
+    private fun selectChip(selected: Chip) {
+        for (i in 0 until binding.chipGroupSemester.childCount) {
+            val child = binding.chipGroupSemester.getChildAt(i) as Chip
+            styleChip(child, child == selected)
+        }
+    }
+
+    private fun styleChip(chip: Chip, selected: Boolean) {
+        if (selected) {
+            chip.setChipBackgroundColorResource(R.color.navy_blue)
+            chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        } else {
+            chip.setChipBackgroundColorResource(R.color.light_gray)
+            chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
+        }
+    }
+
+    private fun showAllSemestersGrouped(bySemester: Map<Int, List<AcademicResult>>) {
+        val items = SemesterResultAdapter.fromGroupedResults(bySemester)
+        semesterResultAdapter = SemesterResultAdapter(items)
+        binding.rvResultCourses.adapter = semesterResultAdapter
+    }
+
+    private fun showSingleSemester(semester: Int, results: List<AcademicResult>) {
+        val grouped = mapOf(semester to results)
+        val items = SemesterResultAdapter.fromGroupedResults(grouped)
+        semesterResultAdapter = SemesterResultAdapter(items)
+        binding.rvResultCourses.adapter = semesterResultAdapter
     }
 
     private fun updateSemesterStats(results: List<AcademicResult>) {
@@ -182,10 +215,6 @@ class ResultsFragment : Fragment() {
 
         binding.tvSemSks.text = semSks.toString()
         binding.tvSemGpa.text = String.format(Locale("id", "ID"), "%.2f", semGpa)
-    }
-
-    private fun showResultsForSemester(results: List<AcademicResult>) {
-        binding.rvResultCourses.adapter = ResultAdapter(results)
     }
 
     private fun showEmptyState(message: String) {

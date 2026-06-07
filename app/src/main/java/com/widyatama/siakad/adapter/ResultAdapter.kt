@@ -30,13 +30,27 @@ class ResultAdapter(private val results: List<AcademicResult>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(result: AcademicResult) {
-            binding.tvCourseName.text = "${result.courseCode} - ${result.courseName}"
+            bindResult(binding, result)
+        }
+    }
+
+    companion object {
+        fun bindResult(binding: ItemResultCourseBinding, result: AcademicResult) {
+            val code = result.courseCode.trim()
+            val name = result.courseName.trim()
+            binding.tvCourseName.text = when {
+                code.isNotEmpty() && name.isNotEmpty() -> "$code - $name"
+                name.isNotEmpty() -> name
+                code.isNotEmpty() -> code
+                else -> "Mata Kuliah"
+            }
             binding.tvSks.text = "${result.sks} SKS"
             binding.tvMutu.text = "Mutu: ${result.mutu}"
-            binding.tvGrade.text = result.grade
 
-            // Set color based on grade
-            val (textColor, bgColor) = when (result.grade) {
+            val grade = result.grade.trim().ifEmpty { deriveGradeFromMutu(result.mutu) }
+            binding.tvGrade.text = grade
+
+            val (textColor, bgColor) = when (grade.uppercase()) {
                 "A" -> Pair(ContextCompat.getColor(binding.root.context, R.color.success), 0xFFDCFCE7.toInt())
                 "B+", "B" -> Pair(ContextCompat.getColor(binding.root.context, R.color.info), 0xFFDBEAFE.toInt())
                 "C" -> Pair(0xFFEAB308.toInt(), 0xFFFEF9C3.toInt())
@@ -46,6 +60,16 @@ class ResultAdapter(private val results: List<AcademicResult>) :
             }
             binding.tvGrade.setTextColor(textColor)
             binding.cvGradeBadge.setCardBackgroundColor(bgColor)
+        }
+
+        fun deriveGradeFromMutu(mutu: Double): String = when {
+            mutu >= 4.0 -> "A"
+            mutu >= 3.5 -> "B+"
+            mutu >= 3.0 -> "B"
+            mutu >= 2.5 -> "C"
+            mutu >= 2.0 -> "D"
+            mutu > 0.0 -> "E"
+            else -> "-"
         }
     }
 }

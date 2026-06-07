@@ -38,6 +38,9 @@ class DashboardViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
+    private val _pengumumanError = MutableLiveData<String?>()
+    val pengumumanError: LiveData<String?> = _pengumumanError
+
     fun loadAllDashboardData(npm: String, semester: Int) {
         _isLoading.value = true
         loadStudentData(npm)
@@ -81,22 +84,25 @@ class DashboardViewModel : ViewModel() {
     }
 
     fun loadPengumuman() {
+        _pengumumanError.postValue(null)
         firestoreManager.getPengumuman(limit = 5) { list, error ->
             if (error != null) {
-                _errorMessage.postValue(error)
+                _pengumumanError.postValue(error)
                 _pengumuman.postValue(emptyList())
             } else {
-                val filtered = list?.filter { it.isActive }
-                    ?.sortedByDescending {
-                        when (it.priority.uppercase()) {
-                            "HIGH" -> 3
-                            "NORMAL" -> 2
-                            "LOW" -> 1
-                            else -> 0
-                        }
-                    }
-                    ?: emptyList()
-                _pengumuman.postValue(filtered)
+                val sorted = (list ?: emptyList())
+                    .sortedWith(
+                        compareByDescending<Pengumuman> { it.createdAt?.seconds ?: 0L }
+                            .thenByDescending {
+                                when (it.priority.uppercase()) {
+                                    "HIGH" -> 3
+                                    "NORMAL" -> 2
+                                    "LOW" -> 1
+                                    else -> 0
+                                }
+                            }
+                    )
+                _pengumuman.postValue(sorted)
             }
             checkLoadingComplete()
         }
@@ -182,6 +188,10 @@ class DashboardViewModel : ViewModel() {
 
     fun clearError() {
         _errorMessage.value = null
+    }
+
+    fun clearPengumumanError() {
+        _pengumumanError.value = null
     }
 
     private fun getCurrentDayName(): String {

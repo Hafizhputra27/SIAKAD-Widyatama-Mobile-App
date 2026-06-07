@@ -157,9 +157,30 @@ class DashboardFragment : Fragment() {
                 val previewList = list.take(3)
                 pengumumanAdapter = PengumumanAdapter(previewList)
                 binding.rvPengumumanPreview.adapter = pengumumanAdapter
-            } else {
+            } else if (viewModel.pengumumanError.value == null) {
                 binding.rvPengumumanPreview.visibility = View.GONE
                 binding.tvEmptyPengumuman.visibility = View.VISIBLE
+                binding.tvEmptyPengumuman.text = "Tidak ada pengumuman"
+            }
+        }
+
+        viewModel.pengumumanError.observe(viewLifecycleOwner) { error ->
+            error?.let {
+                Log.e("DashboardFragment", "Pengumuman error: $it")
+                binding.rvPengumumanPreview.visibility = View.GONE
+                binding.tvEmptyPengumuman.visibility = View.VISIBLE
+                binding.tvEmptyPengumuman.text = "Gagal memuat pengumuman"
+                val message = if (it.contains("PERMISSION_DENIED", ignoreCase = true)) {
+                    "Gagal memuat pengumuman. Coba login ulang."
+                } else {
+                    "Gagal memuat pengumuman: ${it.take(80)}"
+                }
+                com.google.android.material.snackbar.Snackbar.make(
+                    binding.root,
+                    message,
+                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                ).show()
+                viewModel.clearPengumumanError()
             }
         }
 
@@ -173,13 +194,16 @@ class DashboardFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
             error?.let {
-                // Log error teknis untuk debugging — jangan tampilkan ke user
                 Log.e("DashboardFragment", "Firestore error: $it")
                 if (it.contains("FAILED_PRECONDITION") || it.contains("requires an index")) {
                     Log.e("SIAKAD_INDEX", "=== PERLU DEPLOY FIRESTORE INDEX ===")
                     Log.e("SIAKAD_INDEX", "Jalankan: firebase deploy --only firestore:indexes")
                 }
-                // User hanya melihat empty state yang ramah, bukan error teknis
+                com.google.android.material.snackbar.Snackbar.make(
+                    binding.root,
+                    "Gagal memuat data dashboard",
+                    com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
+                ).show()
                 viewModel.clearError()
             }
         }
