@@ -3,7 +3,6 @@ package com.widyatama.siakad.data.remote
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.widyatama.siakad.core.constants.AppConstants
 import com.widyatama.siakad.core.utils.ValidationUtils
 import com.widyatama.siakad.data.local.SharedPrefManager
@@ -25,6 +24,131 @@ class FirestoreManager private constructor() {
         fun getInstance() = instance ?: synchronized(this) {
             instance ?: FirestoreManager().also { instance = it }
         }
+
+        private const val TAG = "FirestoreManager"
+    }
+
+    private fun runWhenAuthenticated(block: () -> Unit, onError: (String) -> Unit) {
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            block()
+            return
+        }
+        val listener = object : FirebaseAuth.AuthStateListener {
+            override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
+                firebaseAuth.removeAuthStateListener(this)
+                if (firebaseAuth.currentUser != null) {
+                    block()
+                } else {
+                    onError("Sesi login expired. Silakan login ulang.")
+                }
+            }
+        }
+        auth.addAuthStateListener(listener)
+    }
+
+    private fun firstString(doc: com.google.firebase.firestore.DocumentSnapshot, vararg keys: String): String {
+        for (key in keys) {
+            doc.getString(key)?.takeIf { it.isNotBlank() }?.let { return it }
+        }
+        return ""
+    }
+
+    private fun firstInt(doc: com.google.firebase.firestore.DocumentSnapshot, vararg keys: String): Int {
+        for (key in keys) {
+            doc.getLong(key)?.toInt()?.let { return it }
+            doc.getDouble(key)?.toInt()?.let { return it }
+        }
+        return 0
+    }
+
+    private fun firstDouble(doc: com.google.firebase.firestore.DocumentSnapshot, vararg keys: String): Double {
+        for (key in keys) {
+            doc.getDouble(key)?.let { return it }
+            doc.getLong(key)?.toDouble()?.let { return it }
+        }
+        return 0.0
+    }
+
+    private fun firstBoolean(doc: com.google.firebase.firestore.DocumentSnapshot, vararg keys: String): Boolean {
+        for (key in keys) {
+            doc.getBoolean(key)?.let { return it }
+        }
+        return false
+    }
+
+    private fun parsePengumumanWithFallback(doc: com.google.firebase.firestore.DocumentSnapshot): Pengumuman? {
+        return try {
+            Pengumuman(
+                id = doc.id,
+                title = firstString(doc, "title", "judul", "nama"),
+                content = firstString(doc, "content", "isi", "body", "deskripsi"),
+                isActive = firstBoolean(doc, "isActive", "isAktif"),
+                priority = firstString(doc, "priority", "prioritas").ifEmpty { "NORMAL" },
+                createdAt = doc.getTimestamp("createdAt")
+                    ?: doc.getTimestamp("created_at")
+                    ?: doc.getTimestamp("tanggal")
+            )
+        } catch (e: Exception) {
+            android.util.Log.e(TAG, "parsePengumuman error: ${e.message} | doc=${doc.data}")
+            null
+        }
+    }
+
+    private fun parseAcademicResultWithFallback(doc: com.google.firebase.firestore.DocumentSnapshot): AcademicResult? {
+        return try {
+            val courseCode = firstString(
+                doc, "mataKuliahId", "kodeMataKuliah", "kodeMK", "courseId", "kode", "code"
+            )
+            val courseName = firstString(
+                doc, "mataKuliahName", "namaMataKuliah", "namaMK", "courseName", "nama", "name"
+            )
+            val grade = firstString(doc, "nilaiHuruf", "nilai", "grade", "huruf")
+            val semester = firstInt(doc, "semester")
+            val sks = firstInt(doc, "sks")
+            val mutu = firstDouble(doc, "mutu", "bobot")
+
+            if (courseCode.isEmpty() && courseName.isEmpty() && sks == 0 && mutu == 0.0) {
+                if (com.widyatama.siakad.BuildConfig.DEBUG) {
+                    android.util.Log.w(TAG, "parseAcademicResult: empty fields | doc=${doc.data}")
+                }
+            }
+
+            AcademicResult(
+                semester = semester,
+                courseCode = courseCode,
+                courseName = courseName,
+                sks = sks,
+                grade = grade,
+                nilaiAngka = firstInt(doc, "nilaiAngka", "nilai_angka"),
+                mutu = mutu,
+                status = firstString(doc, "status").ifEmpty { "LULUS" }
+            )
+        } catch (e: Exception) {
+            android.util.Log.e(TAG, "parseAcademicResult error: ${e.message} | doc=${doc.data}")
+            null
+        }
+    }
+
+    private fun queryActivePengumuman(
+        onSuccess: (List<com.google.firebase.firestore.DocumentSnapshot>) -> Unit,
+        onFailure: (String?) -> Unit
+    ) {
+        db.collection(AppConstants.COL_PENGUMUMAN)
+            .whereEqualTo("isActive", true)
+            .get()
+            .addOnSuccessListener { snap -> onSuccess(snap.documents) }
+            .addOnFailureListener { firstError ->
+                android.util.Log.w(TAG, "pengumuman isActive query failed: ${firstError.message}, trying isAktif")
+                db.collection(AppConstants.COL_PENGUMUMAN)
+                    .whereEqualTo("isAktif", true)
+                    .get()
+                    .addOnSuccessListener { snap -> onSuccess(snap.documents) }
+                    .addOnFailureListener { secondError ->
+                        onFailure(secondError.message ?: firstError.message)
+                    }
+            }
     }
 
     // ── AUTH ──────────────────────────────────────────────────────────────
@@ -217,26 +341,30 @@ class FirestoreManager private constructor() {
 
     // ── ACADEMIC RESULTS ──────────────────────────────────────────────────
     fun getAcademicResults(npm: String, semester: Int, onResult: (List<AcademicResult>, String?) -> Unit) {
-        db.collection(AppConstants.COL_MAHASISWA).document(npm)
-            .collection(AppConstants.SUBCOL_ACADEMIC_RESULTS)
-            .whereEqualTo("semester", semester)
-            .get()
-            .addOnSuccessListener { snap ->
-                val list = snap.documents.mapNotNull { it.toObject(AcademicResult::class.java) }
-                onResult(list, null)
-            }
-            .addOnFailureListener { onResult(emptyList(), it.message) }
+        runWhenAuthenticated({
+            db.collection(AppConstants.COL_MAHASISWA).document(npm)
+                .collection(AppConstants.SUBCOL_ACADEMIC_RESULTS)
+                .whereEqualTo("semester", semester)
+                .get()
+                .addOnSuccessListener { snap ->
+                    val list = snap.documents.mapNotNull { parseAcademicResultWithFallback(it) }
+                    onResult(list, null)
+                }
+                .addOnFailureListener { onResult(emptyList(), it.message) }
+        }, { error -> onResult(emptyList(), error) })
     }
 
     fun getAllAcademicResults(npm: String, onResult: (List<AcademicResult>, String?) -> Unit) {
-        db.collection(AppConstants.COL_MAHASISWA).document(npm)
-            .collection(AppConstants.SUBCOL_ACADEMIC_RESULTS)
-            .get()
-            .addOnSuccessListener { snap ->
-                val list = snap.documents.mapNotNull { it.toObject(AcademicResult::class.java) }
-                onResult(list, null)
-            }
-            .addOnFailureListener { onResult(emptyList(), it.message) }
+        runWhenAuthenticated({
+            db.collection(AppConstants.COL_MAHASISWA).document(npm)
+                .collection(AppConstants.SUBCOL_ACADEMIC_RESULTS)
+                .get()
+                .addOnSuccessListener { snap ->
+                    val list = snap.documents.mapNotNull { parseAcademicResultWithFallback(it) }
+                    onResult(list, null)
+                }
+                .addOnFailureListener { onResult(emptyList(), it.message) }
+        }, { error -> onResult(emptyList(), error) })
     }
 
     // ── PAYMENTS / TAGIHAN ────────────────────────────────────────────────
@@ -314,33 +442,36 @@ class FirestoreManager private constructor() {
 
     // ── PENGUMUMAN ────────────────────────────────────────────────────────
     fun getPengumuman(limit: Long = 5, onResult: (List<Pengumuman>, String?) -> Unit) {
-        // Client-side filter & sort: hindari composite index where + orderBy
-        db.collection(AppConstants.COL_PENGUMUMAN)
-            .get()
-            .addOnSuccessListener { snap ->
-                val list = snap.documents
-                    .filter { it.getBoolean("isActive") ?: it.getBoolean("isAktif") ?: false }
-                    .mapNotNull { it.toObject(Pengumuman::class.java) }
-                    .sortedByDescending { it.createdAt }
-                    .take(limit.toInt())
-                onResult(list, null)
-            }
-            .addOnFailureListener { onResult(emptyList(), it.message) }
+        runWhenAuthenticated({
+            queryActivePengumuman(
+                onSuccess = { docs ->
+                    val list = docs
+                        .mapNotNull { parsePengumumanWithFallback(it) }
+                        .sortedByDescending { it.createdAt?.seconds ?: 0L }
+                        .take(limit.toInt())
+                    onResult(list, null)
+                },
+                onFailure = { error -> onResult(emptyList(), error) }
+            )
+        }, { error -> onResult(emptyList(), error) })
     }
 
     // ── NOTIFICATIONS ──────────────────────────────────────────────────────
     fun getUnreadPengumumanCount(since: com.google.firebase.Timestamp, onResult: (Int, String?) -> Unit) {
-        db.collection(AppConstants.COL_PENGUMUMAN)
-            .get()
-            .addOnSuccessListener { snap ->
-                val count = snap.documents.count {
-                    val isActive = it.getBoolean("isActive") ?: it.getBoolean("isAktif") ?: false
-                    val createdAt = it.getTimestamp("createdAt")
-                    isActive && createdAt != null && createdAt > since
-                }
-                onResult(count, null)
-            }
-            .addOnFailureListener { onResult(0, it.message) }
+        runWhenAuthenticated({
+            queryActivePengumuman(
+                onSuccess = { docs ->
+                    val count = docs.count { doc ->
+                        val createdAt = doc.getTimestamp("createdAt")
+                            ?: doc.getTimestamp("created_at")
+                            ?: doc.getTimestamp("tanggal")
+                        createdAt != null && createdAt > since
+                    }
+                    onResult(count, null)
+                },
+                onFailure = { error -> onResult(0, error) }
+            )
+        }, { error -> onResult(0, error) })
     }
 
     fun getUnreadTagihanCount(npm: String, since: com.google.firebase.Timestamp, onResult: (Int, String?) -> Unit) {
